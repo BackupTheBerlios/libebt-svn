@@ -20,7 +20,7 @@ get() {
 run mkdir -p config
 run $(get libtoolize 1.5 ) --copy --force --automake
 rm -f config.cache
-run $(get aclocal 1.9 )
+run $(get aclocal 1.9 ) -I m4/
 run $(get autoheader 2.59 )
 run $(get autoconf 2.59 )
 run $(get automake 1.9 ) -a --copy

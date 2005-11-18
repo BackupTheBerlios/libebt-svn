@@ -34,6 +34,7 @@
 #define HAVE_THE_LIBEBT_LIBEBT_HH 1
 
 #include <libebt/libebt_util.hh>
+#include <libebt/libebt_version.hh>
 
 #include <list>
 #include <string>

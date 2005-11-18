@@ -2,6 +2,12 @@ ChangeLog for libebt
 
 2005-11-18 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* m4/libebt_check_cxxflag.m4, m4/generated-file.txt, libebt/libebt.hh,
+	libebt/Makefile.am, libebt/libebt_version.hh.in, configure.ac,
+	Makefile.am, autogen.bash: Move m4 code into m4/ directory. Switch to
+	using VERSION_{MAJOR,MINOR,MICRO}. Generate a libebt_version.hh header
+	for version information.
+
 	* configure.ac, libebt/Makefile.am: Check for usable CXXFLAGS rather
 	than assuming that they work.
 
