@@ -2,6 +2,9 @@ ChangeLog for libebt
 
 2005-11-18 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* configure.ac, libebt/Makefile.am: Check for usable CXXFLAGS rather
+	than assuming that they work.
+
 	* libebt/libebt.hh: Explicitly create members.
 
 	* libebt/libebt_doc.hh, configure.ac, doc/footer.html,
@@ -46,6 +49,7 @@ ChangeLog for libebt
 	* libebt/libebt.hh: Default to std::string as the string type. Make
 	default string arguments work for wide strings. Make BacktraceContext
 	non-copyable. Add BacktraceContext::change_context().
+
 	* libebt/libebt_TEST.cc: Add tests for wide strings.
 
 	* libebt/libebt_demo.cc: Remove unnecessary #includes.

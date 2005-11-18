@@ -1,6 +1,6 @@
 CLEANFILES = *~
 MAINTAINERCLEANFILES = Makefile.in
-AM_CXXFLAGS = -W -Wall -pedantic -I$(top_srcdir)
+AM_CXXFLAGS = -I$(top_srcdir)
 EXTRA_DIST = libebt_doc.hh
 libincludedir = $(includedir)/libebt
 libinclude_HEADERS = libebt.hh libebt_util.hh
