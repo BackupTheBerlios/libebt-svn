@@ -163,7 +163,8 @@ namespace libebt
              * Constructor. Grabs backtrace information from the stack and
              * remembers it.
              */
-            Backtracable() throw ()
+            Backtracable() throw () :
+                _backtrace()
             {
                 BacktraceContext<Tag_, StringType_>::copy_backtrace_items_to(
                         std::back_inserter(_backtrace));

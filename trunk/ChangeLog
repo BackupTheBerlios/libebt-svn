@@ -2,6 +2,8 @@ ChangeLog for libebt
 
 2005-11-18 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt.hh: Explicitly create members.
+
 	* libebt/libebt_doc.hh, configure.ac, doc/footer.html,
 	doc/doxygen.css, doc/valid-html.png, doc/doxygen.conf.in,
 	doc/Makefile.am, doc/header.html: Documentation updates.
