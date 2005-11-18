@@ -1,0 +1,45 @@
+ChangeLog for libebt
+
+2005-11-17 Ciaran McCreesh <ciaranm@gentoo.org>
+
+	* libebt/libebt_doc.hh, doc/doxygen.conf.in: Improve the
+	documentation in various places.
+
+2005-11-16 Ciaran McCreesh <ciaranm@gentoo.org>
+
+	* Version 0.4: Release.
+
+	* Makefile.am, configure.ac, doc/Makefile.am, doc/doxygen.conf.in:
+	Move doxygen generation commands into a subdirectory.
+
+	* libebt/libebt_demo.cc, libebt/libebt_doc.hh: Support multiple
+	commandline arguments.
+
+	* libebt/libebt.hh, libebt/libebt_util.hh, libebt/libebt_util_TEST.cc,
+	doc/doxygen.conf.in: Move stringify and newline_string into a separate
+	utility header.
+
+	* libebt/libebt.hh, libebt/libebt_doc.hh, doc/doxygen.conf.in: Move
+	mainpage documentation into its own file.
+
+	* libebt/*.{cc,hh}: Add copyright notices.
+
+	* libebt/libebt.hh, libebt/libebt_TEST.cc, libebt/test_framework.cc,
+	libebt/test_framework.hh, libebt/test_runner.cc, doc/doxygen.conf.in:
+	Move test code into separate namespaces. Add documentation for the
+	test cases.
+
+	* libebt/libebt.hh: Default to std::string as the string type. Make
+	default string arguments work for wide strings. Make BacktraceContext
+	non-copyable. Add BacktraceContext::change_context().
+	* libebt/libebt_TEST.cc: Add tests for wide strings.
+
+	* libebt/libebt_demo.cc: Remove unnecessary #includes.
+
+	* libebt/libebt.hh: Change the include guard to avoid conflicts with
+	AC_CHECK_HEADERS (thanks to Aaron Walker).
+
+2005-11-13 Ciaran McCreesh <ciaranm@gentoo.org>
+
+	* Version 0.2: Initial release.
+
