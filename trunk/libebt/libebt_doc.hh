@@ -88,32 +88,29 @@ make doxygen
  *
  * to create the configure script.
  *
- * \section authors Authors
+ * libebt does not need any libraries beyond a C++ standard library
+ * implementation.
+ */
+
+/** \page Authors Authors
+ * \section Authors
  *
  * libebt was written by Ciaran McCreesh <ciaranm@gentoo.org>.
+ */
+
+/** \page Threads Threads
+ * \section threads Lack of Thread Safety
  *
- * \section licence Licence
- *
- * libebt is open source, free, libre or whatever else you want to call it. It
- * is distributed under a three-clause BSD licence. See \ref Licence
- * for details.
- *
- * \section changelog ChangeLog
- *
- * There is a \ref ChangeLog available.
- *
- * \section notes Other Notes
- *
- * \subsection threads Lack of Thread Safety
- *
- * libebt will almost certainly have problems in threaded environments!
+ * <b>libebt will almost certainly have problems in threaded environments!</b>
  *
  * It is generally simple enough to adapt libebt to work with any particular
  * thread library through use of a thread-local variable for the static
  * variable in BacktraceContext::_get_list(). However, there is no standard
  * way of doing this.
- *
- * \subsection overhead Overhead
+ */
+
+/** \page Overhead Overhead
+ * \section overhead Overhead
  *
  * libebt's overhead is reasonably low. If performance is a particular
  * concern, avoid specifying exception context inside small functions or
@@ -122,6 +119,22 @@ make doxygen
  * Note that it is possible to introduce huge amounts of overhead when
  * creating the context string. Avoid putting expensive-to-get information
  * in context strings if possible.
+ */
+
+ /** \page Portability Portability
+ * \section portability Portability
+ *
+ * libebt needs a C++ compiler which can handle member templates, and which
+ * comes with a reasonable standard library implementation. There is no
+ * platform-dependent or architecture-dependent code.
+ *
+ * libebt has been reported to work with:
+ * - gcc 3.3.6 on Linux
+ * - gcc 3.3.6 + STLport on Linux
+ * - gcc 3.4.4 on FreeBSD
+ * - gcc 4.1.0 on FreeBSD
+ *
+ * It has been tested on x86, x86_64, mips and sparc.
  */
 
 /** \page ChangeLog

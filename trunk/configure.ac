@@ -1,6 +1,6 @@
 dnl vim: set sw=8 sts=8 noet :
 
-AC_INIT([libebt], [0.4.1])
+AC_INIT([libebt], [0.4.2])
 AC_PREREQ(2.5)
 AC_CONFIG_SRCDIR([libebt/libebt.hh])
 AC_CONFIG_AUX_DIR(config)

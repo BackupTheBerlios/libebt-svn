@@ -2,6 +2,12 @@ ChangeLog for libebt
 
 2005-11-18 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt_doc.hh, configure.ac, doc/footer.html,
+	doc/doxygen.css, doc/valid-html.png, doc/doxygen.conf.in,
+	doc/Makefile.am, doc/header.html: Documentation updates.
+
+2005-11-18 Ciaran McCreesh <ciaranm@gentoo.org>
+
 	* Version 0.4.1: Release.
 
 	* README: Moved onto Berlios.
