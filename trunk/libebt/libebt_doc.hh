@@ -102,15 +102,14 @@ make doxygen
  * libebt was written by Ciaran McCreesh <ciaranm@gentoo.org>.
  */
 
-/** \page Threads Threads
- * \section threads Lack of Thread Safety
+/** \page Threads Threads \section threads Lack of Thread Safety
  *
  * <b>libebt will almost certainly have problems in threaded environments!</b>
  *
  * It is generally simple enough to adapt libebt to work with any particular
  * thread library through use of a thread-local variable for the static
- * variable in BacktraceContext::_get_list(). However, there is no standard
- * way of doing this.
+ * variable in <code>libebt::BacktraceContext::_get_list()</code> . However,
+ * there is no standard way of doing this.
  */
 
 /** \page Overhead Overhead
