@@ -131,6 +131,7 @@ make doxygen
  * libebt has been reported to work with:
  * - gcc 3.3.6 on Linux
  * - gcc 3.3.6 + STLport on Linux
+ * - Intel(R) C++ Compiler 7.1 on Linux
  * - gcc 3.4.4 on FreeBSD
  * - gcc 4.1.0 on FreeBSD
  *

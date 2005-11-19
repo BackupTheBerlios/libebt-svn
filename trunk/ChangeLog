@@ -2,6 +2,8 @@ ChangeLog for libebt
 
 2005-11-19 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* doc/libebt_doc.hh: Add more tested compilers.
+
 	* doc/footer.html: Fix missing </div> tag.
 
 	* Version 0.6: Release.
