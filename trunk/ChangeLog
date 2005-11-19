@@ -2,6 +2,10 @@ ChangeLog for libebt
 
 2005-11-19 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* doc/header.html, doc/footer.html: Remove valid HTML logo for now,
+	sometimes Doxygen generates duff code. Expand the header. Add the
+	OpenSource logo to the footer.
+
 	* libebt/libebt_doc.hh: Extended description.
 
 	* Version 0.6.1: Release.
