@@ -13,7 +13,8 @@
  *
  * The libebt library provides a clean way of getting human-readable backtrace
  * messages in C++. It uses the RAII (resource acquisition is initialisation)
- * idiom to manage backtrace stack items.
+ * idiom to manage backtrace stack items without needing macros, control
+ * structures or an external debugger.
  *
  * A typical application using libebt will produce errors along the lines of
  * the following:
