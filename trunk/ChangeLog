@@ -2,7 +2,9 @@ ChangeLog for libebt
 
 2005-11-19 Ciaran McCreesh <ciaranm@gentoo.org>
 
-	* doc/libebt_doc.hh: Add more tested compilers.
+	* libebt/libebt_version.hh.in: Remove semicolons from #defines.
+
+	* libebt/libebt_doc.hh: Add more tested compilers.
 
 	* doc/footer.html: Fix missing </div> tag.
 

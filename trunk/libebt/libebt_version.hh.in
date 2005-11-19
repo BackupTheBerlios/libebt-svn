@@ -11,13 +11,13 @@
  */
 
 /// The major version (eg 0.4.1 -> 0)
-#define LIBEBT_VERSION_MAJOR @VERSION_MAJOR@;
+#define LIBEBT_VERSION_MAJOR @VERSION_MAJOR@
 
 /// The minor version (eg 0.4.1 -> 4)
-#define LIBEBT_VERSION_MINOR @VERSION_MINOR@;
+#define LIBEBT_VERSION_MINOR @VERSION_MINOR@
 
 /// The micro version (eg 0.4.1 -> 1)
-#define LIBEBT_VERSION_MICRO @VERSION_MICRO@;
+#define LIBEBT_VERSION_MICRO @VERSION_MICRO@
 
 /// The version, two digits per part (eg 1.3.5 -> 10305)
 #define LIBEBT_VERSION ((100 * 100 * LIBEBT_VERSION_MAJOR) \
