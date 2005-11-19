@@ -2,6 +2,8 @@ ChangeLog for libebt
 
 2005-11-19 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt_doc.hh: Add link to a full explanation of RAII.
+
 	* doc/header.html, doc/footer.html: Remove valid HTML logo for now,
 	sometimes Doxygen generates duff code. Expand the header. Add the
 	OpenSource logo to the footer.

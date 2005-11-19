@@ -12,9 +12,10 @@
  * \section overview Overview
  *
  * The libebt library provides a clean way of getting human-readable backtrace
- * messages in C++. It uses the RAII (resource acquisition is initialisation)
- * idiom to manage backtrace stack items without needing macros, control
- * structures or an external debugger.
+ * messages in C++. It uses the <a
+ * href="http://www.research.att.com/~bs/bs_faq2.html#finally">RAII (resource
+ * acquisition is initialisation) idiom</a> to manage backtrace stack items
+ * without needing macros, control structures or an external debugger.
  *
  * A typical application using libebt will produce errors along the lines of
  * the following:
