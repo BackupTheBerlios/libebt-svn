@@ -2,6 +2,8 @@ ChangeLog for libebt
 
 2005-11-19 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt_demo.cc: Remove unnecessary #includes.
+
 	* libebt/libebt_doc.hh: Add link to a full explanation of RAII.
 
 	* doc/header.html, doc/footer.html: Remove valid HTML logo for now,

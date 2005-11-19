@@ -6,7 +6,6 @@
 #include <exception>
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <cstdlib>
 
 /* Tag for our exception context. */
