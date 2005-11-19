@@ -75,7 +75,8 @@ make check
 sudo make install
 \endverbatim
  *
- * If you have doxygen, you can make some HTML documentation:
+ * If you have <a href="http://www.doxygen.org/">Doxygen</a>, you can make some
+ * HTML documentation:
  *
  * \verbatim
 make doxygen
@@ -88,7 +89,8 @@ make doxygen
 ./autogen.bash
 \endverbatim
  *
- * to create the configure script.
+ * to create the configure script. This will require a full GNU autotools setup
+ * on your system.
  *
  * libebt does not need any libraries beyond a C++ standard library
  * implementation.
