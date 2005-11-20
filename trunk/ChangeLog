@@ -2,6 +2,8 @@ ChangeLog for libebt
 
 2005-11-20 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt_demo.cc: Fix silly pointer to temporary bug.
+
 	* libebt/libebt_doc.hh -> doc/libebt_doc.hh, doc/doxygen.conf.in,
 	libebt/Makefile.am, doc/Makefile.am: Move docs into doc/.
 

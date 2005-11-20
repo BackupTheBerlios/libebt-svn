@@ -30,9 +30,9 @@ class Exception : public libebt::Backtracable<ExceptionTag>,
         {
         }
 
-        const char * what() const throw ()
+        std::string message() const throw ()
         {
-            return (_message + " (" + std::exception::what() + ")").c_str();
+            return _message;
         }
 };
 
@@ -138,7 +138,8 @@ main(int argc, char *argv[])
     }
     catch (Exception & e)
     {
-        std::cerr << "Error!\n  * " << e.backtrace(":\n  * ") << e.what() << std::endl;
+        std::cerr << "Error!\n  * " << e.backtrace(":\n  * ")
+            << e.message() << " (" << e.what() << ")" << std::endl;
         return EXIT_FAILURE;
     }
     catch (...)
