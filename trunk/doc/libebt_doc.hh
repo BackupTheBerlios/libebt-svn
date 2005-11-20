@@ -93,7 +93,9 @@ make doxygen
  * on your system.
  *
  * libebt does not need any libraries beyond a C++ standard library
- * implementation.
+ * implementation. If the <a href="http://www.boost.org/">Boost</a> library
+ * <code>Boost.Threads</code> is available, it will be used for one of the test
+ * cases; however, <b>Boost is not required</b>.
  */
 
 /** \page Authors Authors
@@ -102,14 +104,50 @@ make doxygen
  * libebt was written by Ciaran McCreesh <ciaranm@gentoo.org>.
  */
 
-/** \page Threads Threads \section threads Lack of Thread Safety
+/** \page Threads Threads
+ * \section threads Using libebt with Threads
  *
- * <b>libebt will almost certainly have problems in threaded environments!</b>
+ * By default, <b>libebt will almost certainly have problems in threaded
+ * environments</b>! However, it can probably be made to work correctly
+ * alongside most thread libraries.
  *
- * It is generally simple enough to adapt libebt to work with any particular
- * thread library through use of a thread-local variable for the static
- * variable in <code>libebt::BacktraceContext::_get_list()</code> . However,
- * there is no standard way of doing this.
+ * Generally, providing a specialisation of libebt::BacktraceContextHolder which
+ * uses thread specific storage is all that is needed.
+ *
+ * \subsection boost Boost Threads
+ *
+ * Here's a brief snippet demonstrating how to use libebt with the Boost
+ * thread library. Note that context from the owning thread is <b>not</b>
+ * copied into the child thread using this method.
+\code
+#include <boost/thread.hpp>
+#include <libebt/libebt.hh>
+
+struct ExceptionTag { };
+typedef BacktraceContext<ExceptionTag> Context;
+
+namespace libebt
+{
+    template<>
+    struct BacktraceContextHolder<ThreadedExceptionTag>
+    {
+        typedef std::list<std::string> ListType;
+
+        static ListType * const get_list()
+        {
+            static boost::thread_specific_ptr<ListType> the_list_ptr;
+
+            ListType * result(the_list_ptr.get());
+            if (0 == result)
+            {
+                the_list_ptr.reset(new ListType);
+                result = the_list_ptr.get();
+            }
+            return result;
+        }
+    };
+}
+\endcode
  */
 
 /** \page Overhead Overhead
@@ -130,6 +168,10 @@ make doxygen
  * libebt needs a C++ compiler which can handle member templates, and which
  * comes with a reasonable standard library implementation. There is no
  * platform-dependent or architecture-dependent code.
+ *
+ * If the <a href="http://www.boost.org/">Boost</a> library
+ * <code>Boost.Threads</code> is available, it will be used for one of the test
+ * cases; however, <b>Boost is not required</b>.
  *
  * libebt has been reported to work with:
  * - gcc 3.3.6 on Linux

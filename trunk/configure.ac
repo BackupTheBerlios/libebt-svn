@@ -30,6 +30,39 @@ LIBEBT_CHECK_CXXFLAG([-W])
 LIBEBT_CHECK_CXXFLAG([-Wall])
 LIBEBT_CHECK_CXXFLAG([-pedantic])
 
+dnl check whether we should do wstring
+AC_MSG_CHECKING([whether we should do std::wstring tests])
+AC_COMPILE_IFELSE([
+#include <string>
+std::wstring s;
+	],
+	[use_wstring=yes],
+	[use_wstring=no])
+AC_MSG_RESULT($use_wstring)
+AM_CONDITIONAL(USE_WSTRING_TESTS, test x"$use_wstring" = "xyes")
+
+dnl check whether we should do thread tests
+save_CXXFLAGS=$CXXFLAGS
+CXXFLAGS="$CXXFLAGS -pthread"
+AC_MSG_CHECKING([whether we should do boost::thread tests])
+AC_COMPILE_IFELSE([
+#include <boost/thread.hpp>
+#include <memory>
+void f()
+{
+}
+
+void g()
+{
+    std::auto_ptr<boost::thread> t(new boost::thread(f));
+}
+	],
+	[use_thread=yes],
+	[use_thread=no])
+CXXFLAGS=$save_CXXFLAGS
+AC_MSG_RESULT($use_thread)
+AM_CONDITIONAL(USE_THREAD_TESTS, test x"$use_thread" = "xyes")
+
 dnl generated file tag
 GENERATED_FILE=m4/generated-file.txt
 AC_SUBST_FILE(GENERATED_FILE)

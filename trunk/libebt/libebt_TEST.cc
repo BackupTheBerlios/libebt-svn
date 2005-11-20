@@ -53,9 +53,6 @@ namespace test_cases
 
     struct OurContext2 { };
     typedef BacktraceContext<OurContext2, std::string> BC2;
-
-    struct OurContext3 { };
-    typedef BacktraceContext<OurContext3, std::wstring> BC3;
 #endif
 
 #ifdef DOXYGEN
@@ -240,23 +237,5 @@ namespace test_cases
             }
         }
     } exception_tests;
-
-    /**
-     * \test Wide string tests.
-     */
-    struct WideStringTests : TestCase
-    {
-        WideStringTests() : TestCase("wide string tests") { }
-
-        void run()
-        {
-            TEST_CHECK(BC3::backtrace() == std::wstring(L""));
-            BC3 c1(L"wide string");
-            TEST_CHECK(BC3::backtrace() == std::wstring(L"wide string\n"));
-            BC3 c2(L"wide string two");
-            TEST_CHECK(BC3::backtrace() == std::wstring(L"wide string\nwide string two\n"));
-        }
-    } wide_string_tests;
-
 }
 

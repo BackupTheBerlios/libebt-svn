@@ -2,6 +2,14 @@ ChangeLog for libebt
 
 2005-11-20 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt.hh, libebt/libebt_wstring_TEST.cc,
+	libebt/libebt_TEST.cc, libebt/Makefile.am, doc/doxygen.conf.in.
+	libebt/libebt_boost_threaded_TEST.cc, doc/libebt_doc.hh, configure.ac:
+	Move std::wstring tests into a separate file. Replace BacktraceContext
+	_get_list() method with a BacktraceContextHolder class, allowing the
+	method to be overridden for other tags (eg for threads). Add a Boost
+	threads test. Make wstring and threads tests optional.
+
 	* libebt/libebt_demo.cc: Fix silly pointer to temporary bug.
 
 	* libebt/libebt_doc.hh -> doc/libebt_doc.hh, doc/doxygen.conf.in,

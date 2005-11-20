@@ -48,6 +48,30 @@
 namespace libebt
 {
     /**
+     * Holds the backtrace context for a given tag. This can be overridden
+     * for a given tag type (for example, if thread safety is needed) by
+     * specialising the template. See \link Threads Threads \endlink for
+     * details.
+     */
+    template <typename Tag_, typename StringType_ = std::string>
+    struct BacktraceContextHolder
+    {
+        /**
+         * Our list type.
+         */
+        typedef std::list<StringType_> ListType;
+
+        /**
+         * Return the backtrace context list.
+         */
+        static inline ListType * const get_list()
+        {
+            static ListType the_list;
+            return &the_list;
+        }
+    };
+
+    /**
      * Represents an item on the backtrace context stack. When a
      * BacktraceContext is instantiated, a context stack entry is acquired. When
      * the BacktraceContext is destroyed, the stack entry is removed.
@@ -62,19 +86,8 @@ namespace libebt
     class BacktraceContext
     {
         private:
-            /**
-             * Our backtrace list type. Internal use only.
-             */
-            typedef std::list<StringType_> ListType;
-
-            /**
-             * Return the backtrace stack. Internal use only.
-             */
-            inline static ListType * _get_list()
-            {
-                static ListType list;
-                return &list;
-            }
+            typedef BacktraceContextHolder<Tag_, StringType_> HolderType;
+            typedef typename HolderType::ListType ListType;
 
             /**
              * Do not copy.
@@ -95,7 +108,7 @@ namespace libebt
              * \param context The context message.
              */
             inline BacktraceContext(const StringType_ & context) :
-                _our_item(_get_list()->insert(_get_list()->end(), context))
+                _our_item(HolderType::get_list()->insert(HolderType::get_list()->end(), context))
             {
             }
 
@@ -104,7 +117,7 @@ namespace libebt
              */
             inline ~BacktraceContext()
             {
-                _get_list()->pop_back();
+                HolderType::get_list()->pop_back();
             }
 
             /**
@@ -135,7 +148,7 @@ namespace libebt
             template <typename I_>
             static void copy_backtrace_items_to(I_ i)
             {
-                std::copy(_get_list()->begin(), _get_list()->end(), i);
+                std::copy(HolderType::get_list()->begin(), HolderType::get_list()->end(), i);
             }
     };
 
@@ -212,7 +225,8 @@ StringType_
 libebt::BacktraceContext<Tag_, StringType_>::backtrace(const StringType_ & item_terminator)
 {
     StringType_ result;
-    typename ListType::const_iterator p(_get_list()->begin()), end(_get_list()->end());
+    typename ListType::const_iterator p(HolderType::get_list()->begin()),
+             end(HolderType::get_list()->end());
     for ( ; p != end ; ++p)
         result = result + *p + item_terminator;
     return result;
