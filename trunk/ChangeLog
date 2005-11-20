@@ -2,7 +2,10 @@ ChangeLog for libebt
 
 2005-11-20 Ciaran McCreesh <ciaranm@gentoo.org>
 
-	* libebt/libebt_doc.html: Fix titles for ChangeLog, Licence.
+	* libebt/libebt_doc.hh -> doc/libebt_doc.hh, doc/doxygen.conf.in,
+	libebt/Makefile.am, doc/Makefile.am: Move docs into doc/.
+
+	* libebt/libebt_doc.hh: Fix titles for ChangeLog, Licence.
 
 2005-11-19 Ciaran McCreesh <ciaranm@gentoo.org>
 

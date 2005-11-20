@@ -451,7 +451,7 @@ WARN_LOGFILE           =
 # with spaces.
 
 INPUT = ../libebt/libebt.hh ../libebt/libebt_util.hh ../libebt/libebt_TEST.cc
-INPUT += ../libebt/libebt_doc.hh ../libebt/libebt_util_TEST.cc
+INPUT += libebt_doc.hh ../libebt/libebt_util_TEST.cc
 INPUT += ../libebt/libebt_version.hh
 
 # If the value of the INPUT tag contains directories, you can use the 
