@@ -141,13 +141,13 @@ make doxygen
  * It has been tested on x86, x86_64, mips and sparc.
  */
 
-/** \page ChangeLog
- * \section ChangeLog
+/** \page ChangeLog ChangeLog
+ * \section ChangeLog ChangeLog
  * \verbinclude ChangeLog
  */
 
-/** \page Licence
- * \section Licence
+/** \page Licence Licence
+ * \section Licence Licence
  * \verbinclude LICENCE
  */
 
@@ -159,3 +159,4 @@ make doxygen
 /** \namespace libebt
  * Holds the classes used by libebt.
  */
+
