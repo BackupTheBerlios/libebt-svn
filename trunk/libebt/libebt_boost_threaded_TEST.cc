@@ -123,13 +123,15 @@ namespace test_cases
 
         void run()
         {
+            const int thread_count = 10;
+
             TEST_CHECK_EQUAL(BC::backtrace(), "");
             BC c("parent");
             TEST_CHECK_EQUAL(BC::backtrace(), "parent\n");
 
-            std::auto_ptr<boost::thread> threads[7];
-            bool failed[7];
-            for (int i = 0 ; i < 7 ; ++i)
+            std::auto_ptr<boost::thread> threads[thread_count];
+            bool failed[thread_count];
+            for (int i = 0 ; i < thread_count ; ++i)
             {
                 failed[i] = false;
                 threads[i] = std::auto_ptr<boost::thread>(new boost::thread(
@@ -138,12 +140,12 @@ namespace test_cases
 
             TEST_CHECK_EQUAL(BC::backtrace(), "parent\n");
 
-            for (int i = 0 ; i < 7 ; ++i)
+            for (int i = 0 ; i < thread_count ; ++i)
                 threads[i]->join();
 
             TEST_CHECK_EQUAL(BC::backtrace(), "parent\n");
 
-            for (int i = 0 ; i < 7 ; ++i)
+            for (int i = 0 ; i < thread_count ; ++i)
                 check(__PRETTY_FUNCTION__, __FILE__, __LINE__, ! failed[i],
                         "Thread " + stringify(i) + " failed");
 

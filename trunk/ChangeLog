@@ -2,6 +2,9 @@ ChangeLog for libebt
 
 2005-11-20 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt_boost_threaded_TEST.cc: Remove hardcoded numeric
+	constants.
+
 	* configure.ac: Allow manual enable/disable on wstring and threads
 	tests.
 
