@@ -5,8 +5,8 @@ AC_INIT([libebt/libebt.hh])
 AC_CONFIG_AUX_DIR(config)
 
 VERSION_MAJOR=0
-VERSION_MINOR=6
-VERSION_MICRO=1
+VERSION_MINOR=8
+VERSION_MICRO=0
 VERSION_FULL="$VERSION_MAJOR.$VERSION_MINOR.$VERSION_MICRO"
 VERSION="$VERSION_FULL"
 
@@ -33,7 +33,7 @@ LIBEBT_CHECK_CXXFLAG([-pedantic])
 dnl check whether we should do wstring
 AC_MSG_CHECKING([whether we should do std::wstring tests])
 AC_ARG_ENABLE(wstring-tests,
-	      [  --enable-wstring-tests  Enable tests using std::wstring.],
+	      [  --enable-wstring-tests      Enable tests using std::wstring.],
 	      [use_wstring=$enableval],
 	      [
 		AC_COMPILE_IFELSE([
@@ -45,13 +45,13 @@ std::wstring s;
 AC_MSG_RESULT($use_wstring)
 AM_CONDITIONAL(USE_WSTRING_TESTS, test x"$use_wstring" = "xyes")
 
-dnl check whether we should do thread tests
+dnl check whether we should do boost thread tests
 save_CXXFLAGS=$CXXFLAGS
 CXXFLAGS="$CXXFLAGS -pthread"
 AC_MSG_CHECKING([whether we should do boost.threads tests])
-AC_ARG_ENABLE(thread-tests,
-	      [  --enable-thread-tests   Enable tests using boost.threads.],
-	      [use_thread=$enableval],
+AC_ARG_ENABLE(boost-thread-tests,
+	      [  --enable-boost-thread-tests Enable tests using boost.threads.],
+	      [use_boost_thread=$enableval],
 	      [
 		AC_COMPILE_IFELSE([
 #include <boost/thread.hpp>
@@ -65,11 +65,32 @@ void g()
     std::auto_ptr<boost::thread> t(new boost::thread(f));
 }
 	],
-		[use_thread=yes],
-		[use_thread=no])])
+		[use_boost_thread=yes],
+		[use_boost_thread=no])])
 CXXFLAGS=$save_CXXFLAGS
-AC_MSG_RESULT($use_thread)
-AM_CONDITIONAL(USE_THREAD_TESTS, test x"$use_thread" = "xyes")
+AC_MSG_RESULT($use_boost_thread)
+AM_CONDITIONAL(USE_BOOST_THREAD_TESTS, test x"$use_boost_thread" = "xyes")
+
+dnl check whether we should do ZThread thread tests
+AC_MSG_CHECKING([whether we should do ZThread tests])
+AC_ARG_ENABLE(zthread-tests,
+	      [  --enable-zthread-tests      Enable tests using ZThread.],
+	      [use_zthread=$enableval],
+	      [
+		AC_COMPILE_IFELSE([
+#include <zthread/Thread.h>
+class R : public ZThread::Runnable
+{
+	public:
+		void run()
+		{
+		}
+};
+	],
+		[use_zthread=yes],
+		[use_zthread=no])])
+AC_MSG_RESULT($use_zthread)
+AM_CONDITIONAL(USE_ZTHREAD_TESTS, test x"$use_zthread" = "xyes")
 
 dnl generated file tag
 GENERATED_FILE=m4/generated-file.txt

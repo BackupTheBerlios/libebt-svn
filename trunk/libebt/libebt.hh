@@ -62,9 +62,14 @@ namespace libebt
         typedef std::list<StringType_> ListType;
 
         /**
+         * A pointer to our list type.
+         */
+        typedef ListType * const ListPtrType;
+
+        /**
          * Return the backtrace context list.
          */
-        static inline ListType * const get_list()
+        static inline ListPtrType get_list()
         {
             static ListType the_list;
             return &the_list;
@@ -87,7 +92,6 @@ namespace libebt
     {
         private:
             typedef BacktraceContextHolder<Tag_, StringType_> HolderType;
-            typedef typename HolderType::ListType ListType;
 
             /**
              * Do not copy.
@@ -99,7 +103,7 @@ namespace libebt
             /**
              * Our item in the backtrace stack.
              */
-            typename ListType::iterator _our_item;
+            typename HolderType::ListType::iterator _our_item;
 
         public:
             /**
@@ -233,7 +237,7 @@ StringType_
 libebt::BacktraceContext<Tag_, StringType_>::backtrace(const StringType_ & item_terminator)
 {
     StringType_ result;
-    typename ListType::const_iterator p(HolderType::get_list()->begin()),
+    typename HolderType::ListType::const_iterator p(HolderType::get_list()->begin()),
              end(HolderType::get_list()->end());
     for ( ; p != end ; ++p)
         result = result + *p + item_terminator;

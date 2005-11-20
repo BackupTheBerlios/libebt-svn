@@ -59,12 +59,13 @@ namespace libebt
     struct BacktraceContextHolder<test_cases::ThreadedExceptionTag>
     {
         typedef std::list<std::string> ListType;
+        typedef ListType * ListPtrType;
 
-        static ListType * const get_list()
+        static ListPtrType get_list()
         {
             static boost::thread_specific_ptr<ListType> the_list_ptr;
 
-            ListType * result(the_list_ptr.get());
+            ListPtrType result(the_list_ptr.get());
             if (0 == result)
             {
                 the_list_ptr.reset(new ListType);
@@ -81,9 +82,9 @@ namespace test_cases
     /**
      * \test Thread test.
      */
-    struct ThreadedTest : TestCase
+    struct BoostThreadedTest : TestCase
     {
-        ThreadedTest() : TestCase("threaded test (will take up to 30s to run!)") { }
+        BoostThreadedTest() : TestCase("boost threaded test (will take up to 30s to run!)") { }
 
 #ifndef DOXYGEN
         void func2(int i)
@@ -135,7 +136,7 @@ namespace test_cases
             {
                 failed[i] = false;
                 threads[i] = std::auto_ptr<boost::thread>(new boost::thread(
-                            boost::lambda::bind(&ThreadedTest::func1, this, i, &failed[i])));
+                            boost::lambda::bind(&BoostThreadedTest::func1, this, i, &failed[i])));
             }
 
             TEST_CHECK_EQUAL(BC::backtrace(), "parent\n");

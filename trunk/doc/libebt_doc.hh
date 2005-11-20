@@ -15,10 +15,13 @@
  * messages in C++. It uses the <a
  * href="http://www.research.att.com/~bs/bs_faq2.html#finally">RAII (resource
  * acquisition is initialisation) idiom</a> to manage backtrace stack items
- * without needing macros, control structures or an external debugger.
+ * without needing macros, control structures or an external debugger --
+ * adding context to a function or block is done through a single simple
+ * variable declaration.
  *
  * A typical application using libebt will produce errors along the lines of
  * the following:
+ *
  * \verbatim
 Caught exception:
  * When performing query 'app-editors/vim' from commandline:
@@ -41,6 +44,16 @@ Version error: '6.4_invalid_version_suffix' is invalid (unknown format at around
  * it includes the filename specified on the remainder of the line. Any other
  * line starting with a '\#' is an invalid directive.
  *
+ * Point to note:
+ * - To avoid confusion with multiple libraries making use of libebt, a tag
+ *   is used to keep track of the context.
+ * - Rather than defining a specific exception class, libebt provides a
+ *   libebt::Backtracable template class which can be used in conjunction with
+ *   other exception heirarchies through multiple inheritance.
+ * - Declaring context for a given block or function is as simple as declaring
+ *   a variable. To avoid typing out libebt::Backtracable<ExceptionTag> in
+ *   several places, a typedef is used.
+ *
  * \include libebt_demo.cc
  *
  * This gives backtraces like the following:
@@ -57,8 +70,13 @@ Error!
   * Error directive on line 2: 'This is an error.' (21FileHasErrorException)
 \endverbatim
  *
- * Backtraces are also available for non-exceptions (for example, for log
- * messages or warnings). See the class documentation for details.
+ * Further things possible with libebt include:
+ * - Backtraces are for non-exceptions (for example, for log messages or
+ *   warnings).
+ * - Support for other string classes (for example, <code>std::wstring</code>)
+ * - Support for using a thread-safe context stack for any thread library
+ *   which supports thread-specific storage.
+ * See the class documentation for details.
  *
  * libebt is a pure template library, so there is no need to link your
  * application against anything. Usually libebt is installed into the
@@ -95,7 +113,9 @@ make doxygen
  * libebt does not need any libraries beyond a C++ standard library
  * implementation. If the <a href="http://www.boost.org/">Boost</a> library
  * <code>Boost.Threads</code> is available, it will be used for one of the test
- * cases; however, <b>Boost is not required</b>.
+ * cases; however, <b>Boost is not required</b>. Similarly, if the <a
+ * href="http://zthread.sourceforge.net/">ZThread</a> library is available, it
+ * will be used for a test case.
  */
 
 /** \page Authors Authors
@@ -119,6 +139,7 @@ make doxygen
  * Here's a brief snippet demonstrating how to use libebt with the Boost
  * thread library. Note that context from the owning thread is <b>not</b>
  * copied into the child thread using this method.
+ *
 \code
 #include <boost/thread.hpp>
 #include <libebt/libebt.hh>
@@ -129,15 +150,16 @@ typedef BacktraceContext<ExceptionTag> Context;
 namespace libebt
 {
     template<>
-    struct BacktraceContextHolder<ThreadedExceptionTag>
+    struct BacktraceContextHolder<test_cases::ThreadedExceptionTag>
     {
         typedef std::list<std::string> ListType;
+        typedef ListType * const ListPtrType;
 
-        static ListType * const get_list()
+        static ListPtrType get_list()
         {
             static boost::thread_specific_ptr<ListType> the_list_ptr;
 
-            ListType * result(the_list_ptr.get());
+            ListPtrType result(the_list_ptr.get());
             if (0 == result)
             {
                 the_list_ptr.reset(new ListType);
@@ -148,12 +170,101 @@ namespace libebt
     };
 }
 \endcode
+ *
+ * \subsection zthread ZThread Threads
+ *
+ * Working with ZThread is slightly trickier because of the need for a
+ * reference counted pointer class for the thread specific storage. If your
+ * standard library provides such a class, it is better to use this than the
+ * quick demo provided.
+ *
+ * Again, the parent thread context is not copied to the child threads.
+ * However, by using the third template argument for ZThread::LocalValue it
+ * is easy to change this behaviour.
+ *
+\code
+#include <zthread/ThreadLocal.h>
+#include <libebt/libebt.hh>
+
+struct ExceptionTag { };
+typedef BacktraceContext<ExceptionTag> Context;
+
+template <typename T_>
+class RefCountedPtr
+{
+    private:
+        struct Data
+        {
+            T_ * value;
+            unsigned count;
+        };
+
+        Data * _data;
+
+    public:
+        RefCountedPtr(T_ * const value) :
+            _data(new Data)
+        {
+            _data->value = value;
+            _data->count = 1;
+        }
+
+        RefCountedPtr(const RefCountedPtr & other) :
+            _data(other._data)
+        {
+            ++(_data->count);
+        }
+
+        ~RefCountedPtr()
+        {
+            if (0 == --(_data->count))
+            {
+                delete _data->value;
+                delete _data;
+            }
+        }
+
+        T_ & operator* ()
+        {
+            return *(_data->value);
+        }
+
+        T_ * operator-> ()
+        {
+            return _data->value;
+        }
+};
+
+namespace libebt
+{
+    template<>
+    struct BacktraceContextHolder<test_cases::ThreadedExceptionTag>
+    {
+        typedef std::list<std::string> ListType;
+        typedef RefCountedPtr<ListType> ListPtrType;
+
+        struct MakeListPtr
+        {
+            ListPtrType operator() () const
+            {
+                return ListPtrType(new ListType);
+            }
+        };
+
+        static ListPtrType get_list()
+        {
+            static ZThread::ThreadLocal<ListPtrType, MakeListPtr> the_list_ptr;
+            return the_list_ptr.get();
+        }
+    };
+}
+\endcode
  */
 
 /** \page Overhead Overhead
  * \section overhead Overhead
  *
- * libebt's overhead is reasonably low. If performance is a particular
+ * libebt's overhead is reasonably low. If performance is of particular
  * concern, avoid specifying exception context inside small functions or
  * tight loops.
  *
@@ -171,7 +282,9 @@ namespace libebt
  *
  * If the <a href="http://www.boost.org/">Boost</a> library
  * <code>Boost.Threads</code> is available, it will be used for one of the test
- * cases; however, <b>Boost is not required</b>.
+ * cases; however, <b>Boost is not required</b>. Similarly, the <a
+ * href="http://zthread.sourceforge.net/">ZThread</a> library, if present, will
+ * be used for a test case.
  *
  * libebt has been reported to work with:
  * - gcc 3.3.6 on Linux

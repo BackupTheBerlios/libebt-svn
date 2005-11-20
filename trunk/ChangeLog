@@ -2,6 +2,11 @@ ChangeLog for libebt
 
 2005-11-20 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt.hh, libebt/libebt_zthread_threaded_TEST.cc,
+	libebt/Makefile.am, libebt/libebt_boost_threaded_TEST.cc,
+	configure.ac, doc/libebt_doc.hh, doc/doxygen.conf.in: Add in tests and
+	documentation for ZThread.
+
 	* libebt/libebt_boost_threaded_TEST.cc: Remove hardcoded numeric
 	constants.
 
