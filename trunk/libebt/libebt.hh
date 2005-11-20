@@ -133,6 +133,14 @@ namespace libebt
             }
 
             /**
+             * Are we empty?
+             */
+            static bool empty()
+            {
+                return HolderType::get_list()->empty();
+            }
+
+            /**
              * Create and return a backtrace string by joining together context
              * information.
              *

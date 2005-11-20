@@ -237,5 +237,21 @@ namespace test_cases
             }
         }
     } exception_tests;
+
+    /**
+     * \test Empty tests.
+     */
+    struct EmptyTests : TestCase
+    {
+        EmptyTests() : TestCase("empty tests") { }
+
+        void run()
+        {
+            TEST_CHECK_EQUAL(BC::backtrace(), "");
+            TEST_CHECK(BC::empty());
+            BC c("foo");
+            TEST_CHECK(! BC::empty());
+        }
+    } empty_tests;
 }
 

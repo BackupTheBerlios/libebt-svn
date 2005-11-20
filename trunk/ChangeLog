@@ -2,6 +2,12 @@ ChangeLog for libebt
 
 2005-11-20 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* configure.ac: Allow manual enable/disable on wstring and threads
+	tests.
+
+	* libebt/libebt.hh, libebt_test.CC: Add empty static method to
+	BacktraceContext.
+
 	* libebt/libebt.hh, libebt/libebt_wstring_TEST.cc,
 	libebt/libebt_TEST.cc, libebt/Makefile.am, doc/doxygen.conf.in.
 	libebt/libebt_boost_threaded_TEST.cc, doc/libebt_doc.hh, configure.ac:
