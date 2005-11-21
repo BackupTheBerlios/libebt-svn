@@ -2,6 +2,10 @@ ChangeLog for libebt
 
 2005-11-21 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt_util.hh: Remove explicit specialisation for
+	std::wstring. It isn't necessary, and it might trick the compiler into
+	instantiating std::wstring unnecessarily.
+
 	* libebt/libebt_demo.cc, doc/libebt_doc.hh: Add support for a #w
 	directive to demonstrate backtraces from non-exceptions.
 

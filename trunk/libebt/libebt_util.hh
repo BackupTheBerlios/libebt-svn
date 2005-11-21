@@ -62,16 +62,6 @@ namespace libebt
     }
 
     /**
-     * Utility function which creates a string containing a newline
-     * (specialisation for std::wstring).
-     */
-    template <>
-    inline std::wstring newline_string<std::wstring>()
-    {
-        return L"\n";
-    }
-
-    /**
      * Convert item to a string.
      */
     template <typename T_>
