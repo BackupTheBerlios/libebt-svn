@@ -2,6 +2,9 @@ ChangeLog for libebt
 
 2005-11-21 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt_demo.cc, doc/libebt_doc.hh: Add support for a #w
+	directive to demonstrate backtraces from non-exceptions.
+
 	* libebt/libebt_boost_threaded_TEST.cc ->
 	libebt/libebt_zthread_threads_TEST.cc,
 	libebt/libebt_zthread_threaded_TEST.cc ->

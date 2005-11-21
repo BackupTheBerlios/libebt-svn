@@ -41,8 +41,9 @@ Version error: '6.4_invalid_version_suffix' is invalid (unknown format at around
  * Here's a simple preprocessor. It takes the name of a file and copies each
  * non-directive line to stdout. If a line starts with '\#e ', it generates
  * an error message from the rest of the line. If a line starts with '\#i ',
- * it includes the filename specified on the remainder of the line. Any other
- * line starting with a '\#' is an invalid directive.
+ * it includes the filename specified on the remainder of the line. If a line
+ * starts with '\#w ', it generates a warning (with context) from the rest of
+ * the line. Any other line starting with a '\#' is an invalid directive.
  *
  * Point to note:
  * - To avoid confusion with multiple libraries making use of libebt, a tag
@@ -71,8 +72,6 @@ Error!
 \endverbatim
  *
  * Further things possible with libebt include:
- * - Backtraces are for non-exceptions (for example, for log messages or
- *   warnings).
  * - Support for other string classes (for example, <code>std::wstring</code>)
  * - Support for using a thread-safe context stack for any thread library
  *   which supports thread-specific storage.

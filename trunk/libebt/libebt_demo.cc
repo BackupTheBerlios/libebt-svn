@@ -102,6 +102,9 @@ process_file(const std::string & filename, unsigned depth = 0)
 
         if (0 == line.compare(0, 3, "#e "))
             throw FileHasErrorException(line_number, line.substr(3));
+        else if (0 == line.compare(0, 3, "#w "))
+            std::cerr << "Warning!\n  * " << Context::backtrace(":\n  * ")
+                << "Warning directive: " << line.substr(3) << std::endl;
         else if (0 == line.compare(0, 3, "#i "))
         {
             Context c2("From #i directive on line " + libebt::stringify(line_number));
