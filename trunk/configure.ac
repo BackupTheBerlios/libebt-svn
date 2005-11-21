@@ -92,6 +92,20 @@ class R : public ZThread::Runnable
 AC_MSG_RESULT($use_zthread)
 AM_CONDITIONAL(USE_ZTHREAD_TESTS, test x"$use_zthread" = "xyes")
 
+dnl check whether we should do pthread thread tests
+AC_MSG_CHECKING([whether we should do pthread tests])
+AC_ARG_ENABLE(pthread-tests,
+	      [  --enable-pthread-tests      Enable tests using pthread.],
+	      [use_pthread=$enableval],
+	      [
+		AC_COMPILE_IFELSE([
+#include <pthread.h>
+	],
+		[use_pthread=yes],
+		[use_pthread=no])])
+AC_MSG_RESULT($use_pthread)
+AM_CONDITIONAL(USE_PTHREAD_TESTS, test x"$use_pthread" = "xyes")
+
 dnl generated file tag
 GENERATED_FILE=m4/generated-file.txt
 AC_SUBST_FILE(GENERATED_FILE)

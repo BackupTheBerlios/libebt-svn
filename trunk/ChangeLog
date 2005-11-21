@@ -2,6 +2,11 @@ ChangeLog for libebt
 
 2005-11-21 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt_pthread_threads.hh,
+	libebt/libebt_pthread_threads_TEST.cc, libebt/Makefile.am,
+	configure.ac, doc/libebt_doc.hh, doc/doxygen.conf.in: Add a helped
+	class for pthread. Add optional tests for pthread.
+
 	* libebt/libebt_util.hh: Remove explicit specialisation for
 	std::wstring. It isn't necessary, and it might trick the compiler into
 	instantiating std::wstring unnecessarily.

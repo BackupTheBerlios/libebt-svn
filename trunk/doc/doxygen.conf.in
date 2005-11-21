@@ -459,6 +459,8 @@ INPUT += ../libebt/libebt_version_TEST.cc ../libebt/libebt_context_TEST.cc
 INPUT += ../libebt/libebt_backtracable_TEST.cc
 INPUT += ../libebt/libebt_boost_threads.hh
 INPUT += ../libebt/libebt_zthread_threads.hh
+INPUT += ../libebt/libebt_pthread_threads.hh
+INPUT += ../libebt/libebt_pthread_threads_TEST.cc
 
 # If the value of the INPUT tag contains directories, you can use the 
 # FILE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 

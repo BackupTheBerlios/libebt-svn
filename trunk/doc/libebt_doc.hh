@@ -113,12 +113,12 @@ make doxygen
  * libebt does not need any libraries beyond a C++ standard library
  * implementation. If the <a href="http://www.boost.org/">Boost</a> library
  * <code>Boost.Threads</code> is available, it will be used for one of the test
- * cases; however, <b>Boost is not required</b>. Similarly, if the <a
- * href="http://zthread.sourceforge.net/">ZThread</a> library is available, it
- * will be used for a test case.
+ * cases; however, <b>Boost is not required</b>. Similarly, <a
+ * href="http://zthread.sourceforge.net/">ZThread</a> and pthread, if available,
+ * will be used for test cases.
  *
- * Headers for use with ZThread and Boost will be installed, but they are not
- * used except in test cases or when explicitly \#included.
+ * Headers for use with ZThread, Boost and pthread will be installed, but they
+ * are not used except in test cases or when explicitly \#included.
  */
 
 /** \page Authors Authors
@@ -136,9 +136,9 @@ make doxygen
  *
  * Generally, providing a specialisation of libebt::BacktraceContextHolder that
  * uses thread specific storage is all that is needed. If you are using Boost
- * threads or ZThread, an existing helper is already available. Otherwise, have
- * a look at libebt/libebt_boost_threads.hh and libebt/libebt_zthread_threads.hh
- * for how to get started.
+ * threads, ZThread or pthread, an existing helper is already available.
+ * Otherwise, have a look at libebt/libebt_boost_threads.hh and
+ * libebt/libebt_zthread_threads.hh for how to get started.
  *
  * \subsection boost Boost Threads
  *
@@ -186,6 +186,28 @@ namespace libebt
     };
 }
 \endcode
+ *
+ * \subsection pthread POSIX Threads (pthread)
+ *
+ * An example for pthread:
+ *
+\code
+#include <pthread.h>
+#include <libebt/libebt.hh>
+#include <libebt/libebt_pthread_threads.hh>
+
+struct ExceptionTag { };
+typedef BacktraceContext<ExceptionTag> Context;
+
+namespace libebt
+{
+    template<>
+    struct BacktraceContextHolder<test_cases::ThreadedExceptionTag> :
+        PthreadBacktraceContextHolder<test_cases::ThreadedExceptionTag>
+    {
+    };
+}
+\endcode
  */
 
 /** \page Overhead Overhead
@@ -209,11 +231,11 @@ namespace libebt
  *
  * If the <a href="http://www.boost.org/">Boost</a> library
  * <code>Boost.Threads</code> is available, it will be used for one of the test
- * cases; however, <b>Boost is not required</b>. Similarly, the <a
- * href="http://zthread.sourceforge.net/">ZThread</a> library, if present, will
- * be used for a test case.
+ * cases; however, <b>Boost is not required</b>. Similarly, <a
+ * href="http://zthread.sourceforge.net/">ZThread</a> and pthread, if present, will
+ * be used for test cases.
  *
- * Helper headers for both Boost and ZThread will be installed, but they are not
+ * Helper headers for Boost, ZThread and pthread will be installed, but they are not
  * used unless explicitly \#included.
  *
  * libebt has been reported to work with:

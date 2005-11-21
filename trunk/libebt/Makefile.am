@@ -35,6 +35,14 @@ libebt_zthread_threads_TEST_LDADD = libebttests.a
 libebt_zthread_threads_TEST_LDFLAGS = -lZThread
 endif
 
+if USE_PTHREAD_TESTS
+the_tests += libebt_pthread_threads_TEST
+
+libebt_pthread_threads_TEST_SOURCES = libebt_pthread_threads_TEST.cc $(test_headers) $(libinclude_HEADERS)
+libebt_pthread_threads_TEST_LDADD = libebttests.a
+libebt_pthread_threads_TEST_LDFLAGS = -lpthread
+endif
+
 TESTS = $(the_tests)
 
 libebttests_a_SOURCES = test_framework.cc test_runner.cc $(test_headers)
