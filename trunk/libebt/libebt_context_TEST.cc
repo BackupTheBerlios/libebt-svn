@@ -41,7 +41,8 @@ using namespace libebt;
 
 /**
  * \file
- * Test cases for libebt.hh.
+ * Test cases for libebt_context.hh related to the
+ * libebt::BacktraceContext class template.
  */
 
 namespace test_cases
@@ -199,44 +200,6 @@ namespace test_cases
             TEST_CHECK_EQUAL(BC::backtrace(), "All hail Discordia!\n");
         }
     } nested_change_tests;
-
-#ifndef DOXYGEN
-    class E : public Backtracable<OurContext, std::string>,
-              public std::exception
-    {
-        public:
-            E() throw () :
-                Backtracable<OurContext, std::string>(),
-                std::exception()
-            {
-            }
-    };
-#endif
-
-    /**
-     * \test Exception tests.
-     */
-    struct ExceptionTests : TestCase
-    {
-        ExceptionTests() : TestCase("exception tests") { }
-
-        void run()
-        {
-            TEST_CHECK_EQUAL(BC::backtrace(), "");
-            try
-            {
-                BC c1("hail");
-                BC c2("Eris");
-                throw E();
-                TEST_CHECK(false);
-            }
-            catch (const E & e)
-            {
-                TEST_CHECK_EQUAL(e.backtrace(), "hail\nEris\n");
-                TEST_CHECK_EQUAL(BC::backtrace(), "");
-            }
-        }
-    } exception_tests;
 
     /**
      * \test Empty tests.

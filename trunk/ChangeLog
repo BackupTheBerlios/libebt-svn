@@ -2,6 +2,12 @@ ChangeLog for libebt
 
 2005-11-21 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt_TEST.cc, libebt/libebt_context_TEST.cc,
+	libebt/libebt_version_TEST.cc, libebt/libebt_backtracable_TEST.cc,
+	libebt/Makefile.am, libebt/libebt_version.hh.in, doc/doxygen.conf.in:
+	Split up test code. Add test cases for libebt_version.hh. Make
+	libebt_version.hh get LIBEBT_VERSION correct.
+
 	* doc/doxygen.conf.in, libebt/libebt.hh, libebt/libebt_context.hh,
 	libebt/libebt_backtracable.hh, libebt/Makefile.am: Split things out of
 	libebt.hh.

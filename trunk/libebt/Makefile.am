@@ -6,7 +6,8 @@ libincludedir = $(includedir)/libebt
 libinclude_HEADERS = libebt.hh libebt_util.hh libebt_version.hh \
 	libebt_context.hh libebt_backtracable.hh
 
-the_tests = libebt_TEST libebt_util_TEST
+the_tests = libebt_context_TEST libebt_backtracable_TEST libebt_util_TEST \
+	libebt_version_TEST
 test_headers = test_framework.hh test_runner.hh
 
 if USE_WSTRING_TESTS
@@ -37,8 +38,14 @@ TESTS = $(the_tests)
 
 libebttests_a_SOURCES = test_framework.cc test_runner.cc $(test_headers)
 
-libebt_TEST_SOURCES = libebt_TEST.cc $(test_headers) $(libinclude_HEADERS)
-libebt_TEST_LDADD = libebttests.a
+libebt_context_TEST_SOURCES = libebt_context_TEST.cc $(test_headers) $(libinclude_HEADERS)
+libebt_context_TEST_LDADD = libebttests.a
+
+libebt_version_TEST_SOURCES = libebt_version_TEST.cc $(test_headers) $(libinclude_HEADERS)
+libebt_version_TEST_LDADD = libebttests.a
+
+libebt_backtracable_TEST_SOURCES = libebt_backtracable_TEST.cc $(test_headers) $(libinclude_HEADERS)
+libebt_backtracable_TEST_LDADD = libebttests.a
 
 libebt_util_TEST_SOURCES = libebt_util_TEST.cc $(test_headers) $(libinclude_HEADERS)
 libebt_util_TEST_LDADD = libebttests.a
