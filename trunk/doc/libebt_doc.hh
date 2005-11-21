@@ -267,3 +267,6 @@ namespace libebt
  * Holds the classes used by libebt.
  */
 
+/** \namespace libebt::internal_only
+ * Classes which are for internal use only.
+ */

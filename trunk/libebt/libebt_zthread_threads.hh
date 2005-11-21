@@ -16,58 +16,62 @@
 
 namespace libebt
 {
-    /**
-     * Really basic reference counted pointer class, necessary because ZThread
-     * thread local storage is really really dumb. Do not use this in your own
-     * code -- get boost::shared_ptr instead.
-     */
-    template <typename T_>
-    class RefCountedPtr
+    namespace internal_only
     {
+
+        /**
+         * Really basic reference counted pointer class, necessary because ZThread
+         * thread local storage is really really dumb. Do not use this in your own
+         * code -- get boost::shared_ptr instead.
+         */
+        template <typename T_>
+        class RefCountedPtr
+        {
 #ifndef DOXYGEN
-        private:
-            struct Data
-            {
-                T_ * value;
-                unsigned count;
-            };
-
-            Data * _data;
-
-        public:
-            RefCountedPtr(T_ * const value) :
-                _data(new Data)
-            {
-                _data->value = value;
-                _data->count = 1;
-            }
-
-            RefCountedPtr(const RefCountedPtr & other) :
-                _data(other._data)
-            {
-                ++(_data->count);
-            }
-
-            ~RefCountedPtr()
-            {
-                if (0 == --(_data->count))
+            private:
+                struct Data
                 {
-                    delete _data->value;
-                    delete _data;
+                    T_ * value;
+                    unsigned count;
+                };
+
+                Data * _data;
+
+            public:
+                RefCountedPtr(T_ * const value) :
+                    _data(new Data)
+                {
+                    _data->value = value;
+                    _data->count = 1;
                 }
-            }
 
-            T_ & operator* ()
-            {
-                return *(_data->value);
-            }
+                RefCountedPtr(const RefCountedPtr & other) :
+                    _data(other._data)
+                {
+                    ++(_data->count);
+                }
 
-            T_ * operator-> ()
-            {
-                return _data->value;
-            }
+                ~RefCountedPtr()
+                {
+                    if (0 == --(_data->count))
+                    {
+                        delete _data->value;
+                        delete _data;
+                    }
+                }
+
+                T_ & operator* ()
+                {
+                    return *(_data->value);
+                }
+
+                T_ * operator-> ()
+                {
+                    return _data->value;
+                }
 #endif
-    };
+        };
+    }
 
     /**
      * Helper struct for libebt::BacktraceContextHolder when using
@@ -84,7 +88,7 @@ namespace libebt
         /**
          * A pointer to our list type.
          */
-        typedef RefCountedPtr<ListType> ListPtrType;
+        typedef internal_only::RefCountedPtr<ListType> ListPtrType;
 
         /**
          * Create a new ListPtrType instance.
