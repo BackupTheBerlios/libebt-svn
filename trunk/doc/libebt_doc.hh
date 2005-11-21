@@ -76,6 +76,7 @@ Error!
  * - Support for other string classes (for example, <code>std::wstring</code>)
  * - Support for using a thread-safe context stack for any thread library
  *   which supports thread-specific storage.
+ *
  * See the class documentation for details.
  *
  * libebt is a pure template library, so there is no need to link your

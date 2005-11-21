@@ -1,5 +1,9 @@
 ChangeLog for libebt
 
+2005-11-21 Ciaran McCreesh <ciaranm@gentoo.org>
+
+	* libebt/libebt_doc.hh: Documentation formatting fixes.
+
 2005-11-20 Ciaran McCreesh <ciaranm@gentoo.org>
 
 	* libebt/libebt.hh, libebt/libebt_zthread_threaded_TEST.cc,
