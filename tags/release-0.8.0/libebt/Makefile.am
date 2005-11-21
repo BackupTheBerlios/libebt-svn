@@ -21,7 +21,7 @@ the_tests += libebt_boost_threaded_TEST
 libebt_boost_threaded_TEST_SOURCES = libebt_boost_threaded_TEST.cc $(test_headers) $(libinclude_HEADERS)
 libebt_boost_threaded_TEST_LDADD = libebttests.a
 libebt_boost_threaded_TEST_LDFLAGS = -lboost_thread
-libebt_boost_threaded_TEST_CXXFLAGS = -pthread
+libebt_boost_threaded_TEST_CXXFLAGS = -pthread $(AM_CXXFLAGS)
 endif
 
 if USE_ZTHREAD_TESTS

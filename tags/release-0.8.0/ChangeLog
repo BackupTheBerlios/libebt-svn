@@ -4,6 +4,8 @@ ChangeLog for libebt
 
 	* Version 0.8.0: Release.
 
+	* libebt/Makefile.am: Fix CXXFLAGS for tests.
+
 	* libebt/libebt_doc.hh: Documentation formatting fixes.
 
 2005-11-20 Ciaran McCreesh <ciaranm@gentoo.org>
