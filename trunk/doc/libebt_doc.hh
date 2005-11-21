@@ -132,8 +132,11 @@ make doxygen
  * environments</b>! However, it can probably be made to work correctly
  * alongside most thread libraries.
  *
- * Generally, providing a specialisation of libebt::BacktraceContextHolder which
- * uses thread specific storage is all that is needed.
+ * Generally, providing a specialisation of libebt::BacktraceContextHolder that
+ * uses thread specific storage is all that is needed. If you are using Boost
+ * threads or ZThread, an existing helper is already available. Otherwise, have
+ * a look at libebt/libebt_boost_threads.hh and libebt/libebt_zthread_threads.hh
+ * for how to get started.
  *
  * \subsection boost Boost Threads
  *
@@ -144,6 +147,7 @@ make doxygen
 \code
 #include <boost/thread.hpp>
 #include <libebt/libebt.hh>
+#include <libebt/libebt_boost_threads.hh>
 
 struct ExceptionTag { };
 typedef BacktraceContext<ExceptionTag> Context;
@@ -151,112 +155,32 @@ typedef BacktraceContext<ExceptionTag> Context;
 namespace libebt
 {
     template<>
-    struct BacktraceContextHolder<test_cases::ThreadedExceptionTag>
+    struct BacktraceContextHolder<ThreadedExceptionTag> :
+        BoostThreadsBacktraceContextHolder<ThreadedExceptionTag>
     {
-        typedef std::list<std::string> ListType;
-        typedef ListType * const ListPtrType;
-
-        static ListPtrType get_list()
-        {
-            static boost::thread_specific_ptr<ListType> the_list_ptr;
-
-            ListPtrType result(the_list_ptr.get());
-            if (0 == result)
-            {
-                the_list_ptr.reset(new ListType);
-                result = the_list_ptr.get();
-            }
-            return result;
-        }
     };
 }
 \endcode
  *
  * \subsection zthread ZThread Threads
  *
- * Working with ZThread is slightly trickier because of the need for a
- * reference counted pointer class for the thread specific storage. If your
- * standard library provides such a class, it is better to use this than the
- * quick demo provided.
- *
- * Again, the parent thread context is not copied to the child threads.
- * However, by using the third template argument for ZThread::LocalValue it
- * is easy to change this behaviour.
+ * Here's an example for ZThread threads. Again, the parent thread context is
+ * not copied to the child threads.
  *
 \code
-#include <zthread/ThreadLocal.h>
+#include <boost/thread.hpp>
 #include <libebt/libebt.hh>
+#include <libebt/libebt_zthread_threads.hh>
 
 struct ExceptionTag { };
 typedef BacktraceContext<ExceptionTag> Context;
 
-template <typename T_>
-class RefCountedPtr
-{
-    private:
-        struct Data
-        {
-            T_ * value;
-            unsigned count;
-        };
-
-        Data * _data;
-
-    public:
-        RefCountedPtr(T_ * const value) :
-            _data(new Data)
-        {
-            _data->value = value;
-            _data->count = 1;
-        }
-
-        RefCountedPtr(const RefCountedPtr & other) :
-            _data(other._data)
-        {
-            ++(_data->count);
-        }
-
-        ~RefCountedPtr()
-        {
-            if (0 == --(_data->count))
-            {
-                delete _data->value;
-                delete _data;
-            }
-        }
-
-        T_ & operator* ()
-        {
-            return *(_data->value);
-        }
-
-        T_ * operator-> ()
-        {
-            return _data->value;
-        }
-};
-
 namespace libebt
 {
     template<>
-    struct BacktraceContextHolder<test_cases::ThreadedExceptionTag>
+    struct BacktraceContextHolder<ThreadedExceptionTag> :
+        ZThreadBacktraceContextHolder<ThreadedExceptionTag>
     {
-        typedef std::list<std::string> ListType;
-        typedef RefCountedPtr<ListType> ListPtrType;
-
-        struct MakeListPtr
-        {
-            ListPtrType operator() () const
-            {
-                return ListPtrType(new ListType);
-            }
-        };
-
-        static ListPtrType get_list()
-        {
-            static ZThread::ThreadLocal<ListPtrType, MakeListPtr> the_list_ptr;
-            return the_list_ptr.get();
-        }
     };
 }
 \endcode
@@ -286,6 +210,9 @@ namespace libebt
  * cases; however, <b>Boost is not required</b>. Similarly, the <a
  * href="http://zthread.sourceforge.net/">ZThread</a> library, if present, will
  * be used for a test case.
+ *
+ * Helper headers for both Boost and ZThread will be installed, but they are not
+ * used unless explicitly \#included.
  *
  * libebt has been reported to work with:
  * - gcc 3.3.6 on Linux

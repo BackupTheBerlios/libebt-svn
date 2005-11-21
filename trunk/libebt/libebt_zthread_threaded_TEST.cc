@@ -30,6 +30,7 @@
  */
 
 #include "libebt.hh"
+#include "libebt/libebt_zthread_threads.hh"
 #include "test_framework.hh"
 #include "test_runner.hh"
 
@@ -54,73 +55,12 @@ namespace test_cases
     typedef BacktraceContext<ThreadedExceptionTag> BC;
 }
 
-template <typename T_>
-class RefCountedPtr
-{
-    private:
-        struct Data
-        {
-            T_ * value;
-            unsigned count;
-        };
-
-        Data * _data;
-
-    public:
-        RefCountedPtr(T_ * const value) :
-            _data(new Data)
-        {
-            _data->value = value;
-            _data->count = 1;
-        }
-
-        RefCountedPtr(const RefCountedPtr & other) :
-            _data(other._data)
-        {
-            ++(_data->count);
-        }
-
-        ~RefCountedPtr()
-        {
-            if (0 == --(_data->count))
-            {
-                delete _data->value;
-                delete _data;
-            }
-        }
-
-        T_ & operator* ()
-        {
-            return *(_data->value);
-        }
-
-        T_ * operator-> ()
-        {
-            return _data->value;
-        }
-};
-
 namespace libebt
 {
     template<>
-    struct BacktraceContextHolder<test_cases::ThreadedExceptionTag>
+    struct BacktraceContextHolder<test_cases::ThreadedExceptionTag> :
+        ZThreadBacktraceContextHolder<test_cases::ThreadedExceptionTag>
     {
-        typedef std::list<std::string> ListType;
-        typedef RefCountedPtr<ListType> ListPtrType;
-
-        struct MakeListPtr
-        {
-            ListPtrType operator() () const
-            {
-                return ListPtrType(new ListType);
-            }
-        };
-
-        static ListPtrType get_list()
-        {
-            static ZThread::ThreadLocal<ListPtrType, MakeListPtr> the_list_ptr;
-            return the_list_ptr.get();
-        }
     };
 }
 #endif

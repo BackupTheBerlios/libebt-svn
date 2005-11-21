@@ -2,6 +2,13 @@ ChangeLog for libebt
 
 2005-11-21 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt_boost_threads.hh,
+	libebt/libebt_boost_threaded_TEST.cc,
+	libebt/libebt_zthread_threads.hh,
+	libebt/libebt_zthread_threaded_TEST.cc, libebt/Makefile.am,
+	doc/libebt_doc.hh, doc/doxygen.conf.in: Add helper
+	headers for Boost and ZThread threads.
+
 	* libebt/libebt_TEST.cc, libebt/libebt_context_TEST.cc,
 	libebt/libebt_version_TEST.cc, libebt/libebt_backtracable_TEST.cc,
 	libebt/Makefile.am, libebt/libebt_version.hh.in, doc/doxygen.conf.in:

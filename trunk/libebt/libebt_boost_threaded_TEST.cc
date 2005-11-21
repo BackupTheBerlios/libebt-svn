@@ -30,6 +30,7 @@
  */
 
 #include "libebt.hh"
+#include "libebt/libebt_boost_threads.hh"
 #include "test_framework.hh"
 #include "test_runner.hh"
 
@@ -56,23 +57,9 @@ namespace test_cases
 namespace libebt
 {
     template<>
-    struct BacktraceContextHolder<test_cases::ThreadedExceptionTag>
+    struct BacktraceContextHolder<test_cases::ThreadedExceptionTag> :
+        BoostThreadsBacktraceContextHolder<test_cases::ThreadedExceptionTag>
     {
-        typedef std::list<std::string> ListType;
-        typedef ListType * ListPtrType;
-
-        static ListPtrType get_list()
-        {
-            static boost::thread_specific_ptr<ListType> the_list_ptr;
-
-            ListPtrType result(the_list_ptr.get());
-            if (0 == result)
-            {
-                the_list_ptr.reset(new ListType);
-                result = the_list_ptr.get();
-            }
-            return result;
-        }
     };
 }
 #endif
