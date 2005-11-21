@@ -2,6 +2,10 @@ ChangeLog for libebt
 
 2005-11-21 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* doc/doxygen.conf.in, libebt/libebt.hh, libebt/libebt_context.hh,
+	libebt/libebt_backtracable.hh, libebt/Makefile.am: Split things out of
+	libebt.hh.
+
 	* Version 0.8.0: Release.
 
 	* libebt/Makefile.am: Fix CXXFLAGS for tests.

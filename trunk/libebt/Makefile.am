@@ -3,7 +3,8 @@ MAINTAINERCLEANFILES = Makefile.in libebt_version.hh
 AM_CXXFLAGS = -I$(top_srcdir)
 EXTRA_DIST = libebt_version.hh.in
 libincludedir = $(includedir)/libebt
-libinclude_HEADERS = libebt.hh libebt_util.hh libebt_version.hh
+libinclude_HEADERS = libebt.hh libebt_util.hh libebt_version.hh \
+	libebt_context.hh libebt_backtracable.hh
 
 the_tests = libebt_TEST libebt_util_TEST
 test_headers = test_framework.hh test_runner.hh
