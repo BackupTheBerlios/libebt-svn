@@ -452,8 +452,8 @@ WARN_LOGFILE           =
 
 INPUT = ../libebt/libebt.hh ../libebt/libebt_util.hh
 INPUT += ../libebt/libebt_util_TEST.cc ../libebt/libebt_wstring_TEST.cc
-INPUT += ../libebt/libebt_version.hh ../libebt/libebt_boost_threaded_TEST.cc
-INPUT += ../libebt/libebt_zthread_threaded_TEST.cc libebt_doc.hh
+INPUT += ../libebt/libebt_version.hh ../libebt/libebt_boost_threads_TEST.cc
+INPUT += ../libebt/libebt_zthread_threads_TEST.cc libebt_doc.hh
 INPUT += ../libebt/libebt_context.hh ../libebt/libebt_backtracable.hh
 INPUT += ../libebt/libebt_version_TEST.cc ../libebt/libebt_context_TEST.cc
 INPUT += ../libebt/libebt_backtracable_TEST.cc
