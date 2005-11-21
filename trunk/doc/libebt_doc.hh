@@ -117,6 +117,9 @@ make doxygen
  * cases; however, <b>Boost is not required</b>. Similarly, if the <a
  * href="http://zthread.sourceforge.net/">ZThread</a> library is available, it
  * will be used for a test case.
+ *
+ * Headers for use with ZThread and Boost will be installed, but they are not
+ * used except in test cases or when explicitly \#included.
  */
 
 /** \page Authors Authors
