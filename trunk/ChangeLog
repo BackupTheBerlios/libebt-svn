@@ -2,6 +2,8 @@ ChangeLog for libebt
 
 2005-11-21 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* doc/default.css: Tidy up the stylesheet a bit, switch colours.
+
 	* libebt/libebt_zthread_threads.hh, doc/libebt_doc.hh: Move
 	RefCountedPtr into a separate internal_only namespace.
 
