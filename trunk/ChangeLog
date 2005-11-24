@@ -2,6 +2,8 @@ ChangeLog for libebt
 
 2005-11-24 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* doc/footer.html: Add missing alt= attributes for images.
+
 	* Version 0.8.2: Release.
 
 	* configure.ac: Check for broken Boost installs that install the
