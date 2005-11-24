@@ -1,5 +1,10 @@
 ChangeLog for libebt
 
+2005-11-24 Ciaran McCreesh <ciaranm@gentoo.org>
+
+	* configure.ac: Check for broken Boost installs that install the
+	header files for threads but not the libraries.
+
 2005-11-21 Ciaran McCreesh <ciaranm@gentoo.org>
 
 	* doc/default.css: Tidy up the stylesheet a bit, switch colours.

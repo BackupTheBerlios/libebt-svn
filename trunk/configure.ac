@@ -47,27 +47,27 @@ AM_CONDITIONAL(USE_WSTRING_TESTS, test x"$use_wstring" = "xyes")
 
 dnl check whether we should do boost thread tests
 save_CXXFLAGS=$CXXFLAGS
+save_LIBS=$LIBS
 CXXFLAGS="$CXXFLAGS -pthread"
+LIBS="-lboost_thread $LIBS"
 AC_MSG_CHECKING([whether we should do boost.threads tests])
 AC_ARG_ENABLE(boost-thread-tests,
 	      [  --enable-boost-thread-tests Enable tests using boost.threads.],
 	      [use_boost_thread=$enableval],
-	      [
-		AC_COMPILE_IFELSE([
+	      [AC_TRY_LINK([
 #include <boost/thread.hpp>
 #include <memory>
+
 void f()
 {
 }
-
-void g()
-{
-    std::auto_ptr<boost::thread> t(new boost::thread(f));
-}
+	],[
+    std::auto_ptr<boost::thread> t(new boost::thread(&f));
 	],
 		[use_boost_thread=yes],
 		[use_boost_thread=no])])
 CXXFLAGS=$save_CXXFLAGS
+LIBS=$save_LIBS
 AC_MSG_RESULT($use_boost_thread)
 AM_CONDITIONAL(USE_BOOST_THREAD_TESTS, test x"$use_boost_thread" = "xyes")
 
