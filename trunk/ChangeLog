@@ -1,5 +1,9 @@
 ChangeLog for libebt
 
+2005-11-25 Ciaran McCreesh <ciaranm@gentoo.org>
+
+	* doc/doxygen.conf.in: Tweak Doxygen settings slightly.
+
 2005-11-24 Ciaran McCreesh <ciaranm@gentoo.org>
 
 	* doc/footer.html: Add missing alt= attributes for images.
