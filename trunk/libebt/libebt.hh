@@ -38,11 +38,6 @@
 #include <libebt/libebt_context.hh>
 #include <libebt/libebt_backtracable.hh>
 
-#include <list>
-#include <string>
-#include <algorithm>
-#include <iterator>
-
 /** \file
  * Master include file.
  */

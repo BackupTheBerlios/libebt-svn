@@ -1,5 +1,9 @@
 ChangeLog for libebt
 
+2005-11-27 Ciaran McCreesh <ciaranm@gentoo.org>
+
+	* libebt/libebt.hh: Remove unnecessary includes.
+
 2005-11-25 Ciaran McCreesh <ciaranm@gentoo.org>
 
 	* doc/doxygen.conf.in: Tweak Doxygen settings slightly.
