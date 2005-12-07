@@ -8,10 +8,12 @@
 #include <fstream>
 #include <cstdlib>
 
-/* Tag for our exception context. */
+/* Tag for our exception context. This tag allows multiple libraries
+ * to make use of libebt without accidentally causing collisions. */
 struct ExceptionTag { };
 
-/* Exception class. */
+/* A basic exception class. We inherit from libebt::Backtracable to
+ * provide the backtrace() method. */
 class Exception : public libebt::Backtracable<ExceptionTag>,
                   public std::exception
 {
@@ -85,11 +87,15 @@ typedef libebt::BacktraceContext<ExceptionTag, std::string> Context;
 void
 process_file(const std::string & filename, unsigned depth = 0)
 {
+    /* Here's our first example of declaring exception context. It is
+     * done through a simple variable declaration. */
     Context c("In file '" + filename + "'");
 
+    /* Check that we're not too deeply nested. */
     if (depth > 10)
         throw IncludeDepthTooDeepException();
 
+    /* Open and check the file in question. */
     std::ifstream file(filename.c_str());
     if (! file)
         throw CannotOpenFileException(filename);
@@ -101,12 +107,22 @@ process_file(const std::string & filename, unsigned depth = 0)
         ++line_number;
 
         if (0 == line.compare(0, 3, "#e "))
+        {
+            /* We hit an #e directive. Throw an error. */
             throw FileHasErrorException(line_number, line.substr(3));
+        }
         else if (0 == line.compare(0, 3, "#w "))
+        {
+            /* We hit a #w directive. Provide a backtrace, but don't
+             * exit. */
             std::cerr << "Warning!\n  * " << Context::backtrace(":\n  * ")
                 << "Warning directive: " << line.substr(3) << std::endl;
+        }
         else if (0 == line.compare(0, 3, "#i "))
         {
+            /* Note how the exception context can be declared at a non-function
+             * scope. This is useful in tight loops to avoid unnecessary
+             * overhead. */
             Context c2("From #i directive on line " + libebt::stringify(line_number));
             process_file(line.substr(3), depth + 1);
         }
@@ -132,6 +148,8 @@ main(int argc, char *argv[])
 
         for (int argi = 1 ; argi < argc ; ++argi)
         {
+            /* Another example of context being specified in non-function
+             * scope. */
             Context c2("When handling commandline argument '" +
                     libebt::stringify(argv[argi]) + "'");
             process_file(argv[argi]);
@@ -141,6 +159,8 @@ main(int argc, char *argv[])
     }
     catch (Exception & e)
     {
+        /* Use the backtrace method to get a pretty-printed exception
+         * context. */
         std::cerr << "Error!\n  * " << e.backtrace(":\n  * ")
             << e.message() << " (" << e.what() << ")" << std::endl;
         return EXIT_FAILURE;

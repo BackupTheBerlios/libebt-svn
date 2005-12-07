@@ -1,5 +1,9 @@
 ChangeLog for libebt
 
+2005-12-07 Ciaran McCreesh <ciaranm@gentoo.org>
+
+	* libebt/libebt_demo.cc: Add some more comments.
+
 2005-11-27 Ciaran McCreesh <ciaranm@gentoo.org>
 
 	* libebt/libebt.hh: Remove unnecessary includes.
