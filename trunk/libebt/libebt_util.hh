@@ -84,11 +84,11 @@ namespace libebt
     }
 }
 
+/// Mark something as deprecated.
 #ifndef LIBEBT_DEPRECATED
-#  ifdef __GNUC__
+#  if defined(__GNUC__) || defined(DOXYGEN)
 #    define LIBEBT_DEPRECATED __attribute__ ((deprecated))
 #  else
-/// Mark something as deprecated.
 #    define LIBEBT_DEPRECATED
 #  endif
 #endif
