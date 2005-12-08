@@ -2,6 +2,9 @@ ChangeLog for libebt
 
 2005-12-08 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* configure.ac: Add -Wextra -Wold-style-casts -Woverloaded-virtual
+	-Wredundant-decls to possible CXXFLAGS.
+
 	* Version 1.1.0: Release.
 
 	* libebt/libebt_backtraceable.hh, libebt/libebt_backtracable.hh,

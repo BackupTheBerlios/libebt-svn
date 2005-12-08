@@ -28,6 +28,10 @@ AC_PROG_MAKE_SET
 dnl check for cxxflags
 LIBEBT_CHECK_CXXFLAG([-W])
 LIBEBT_CHECK_CXXFLAG([-Wall])
+LIBEBT_CHECK_CXXFLAG([-Wextra])
+LIBEBT_CHECK_CXXFLAG([-Wold-style-casts])
+LIBEBT_CHECK_CXXFLAG([-Woverloaded-virtual])
+LIBEBT_CHECK_CXXFLAG([-Wredundant-decls])
 LIBEBT_CHECK_CXXFLAG([-pedantic])
 
 dnl check whether we should do wstring
