@@ -49,10 +49,10 @@ Version error: '6.4_invalid_version_suffix' is invalid (unknown format at around
  * - To avoid confusion with multiple libraries making use of libebt, a tag
  *   is used to keep track of the context.
  * - Rather than defining a specific exception class, libebt provides a
- *   libebt::Backtracable template class which can be used in conjunction with
+ *   libebt::Backtraceable template class which can be used in conjunction with
  *   other exception heirarchies through multiple inheritance.
  * - Declaring context for a given block or function is as simple as declaring
- *   a variable. To avoid typing out libebt::Backtracable<ExceptionTag> in
+ *   a variable. To avoid typing out libebt::Backtraceable<ExceptionTag> in
  *   several places, a typedef is used.
  *
  * \include libebt_demo.cc

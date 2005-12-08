@@ -41,8 +41,8 @@ using namespace libebt;
 
 /**
  * \file
- * Test cases for libebt_backtracable.hh related to the
- * libebt::Backtracable class template.
+ * Test cases for libebt_backtraceable.hh related to the
+ * libebt::Backtraceable class template.
  */
 
 namespace test_cases
@@ -57,12 +57,12 @@ namespace test_cases
 #endif
 
 #ifndef DOXYGEN
-    class E : public Backtracable<OurContext, std::string>,
+    class E : public Backtraceable<OurContext, std::string>,
               public std::exception
     {
         public:
             E() throw () :
-                Backtracable<OurContext, std::string>(),
+                Backtraceable<OurContext, std::string>(),
                 std::exception()
             {
             }

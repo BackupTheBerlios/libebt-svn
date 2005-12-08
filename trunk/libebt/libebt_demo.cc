@@ -12,9 +12,9 @@
  * to make use of libebt without accidentally causing collisions. */
 struct ExceptionTag { };
 
-/* A basic exception class. We inherit from libebt::Backtracable to
+/* A basic exception class. We inherit from libebt::Backtraceable to
  * provide the backtrace() method. */
-class Exception : public libebt::Backtracable<ExceptionTag>,
+class Exception : public libebt::Backtraceable<ExceptionTag>,
                   public std::exception
 {
     protected:
@@ -22,7 +22,7 @@ class Exception : public libebt::Backtracable<ExceptionTag>,
 
     public:
         Exception(const std::string & message) throw () :
-            libebt::Backtracable<ExceptionTag>(),
+            libebt::Backtraceable<ExceptionTag>(),
             std::exception(),
             _message(message)
         {

@@ -37,7 +37,7 @@
 #include <sstream>
 
 /** \file
- * Utility functions.
+ * Utility functions and macros.
  */
 
 namespace libebt
@@ -84,4 +84,14 @@ namespace libebt
     }
 }
 
+#ifndef LIBEBT_DEPRECATED
+#  ifdef __GNUC__
+#    define LIBEBT_DEPRECATED __attribute__ ((deprecated))
+#  else
+/// Mark something as deprecated.
+#    define LIBEBT_DEPRECATED
+#  endif
 #endif
+
+#endif
+

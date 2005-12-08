@@ -1,5 +1,16 @@
 ChangeLog for libebt
 
+2005-12-08 Ciaran McCreesh <ciaranm@gentoo.org>
+
+	* libebt/libebt_backtraceable.hh, libebt/libebt_backtracable.hh,
+	libebt/libebt_demo.cc, libebt/libebt_util.hh, libebt/Makefile.am,
+	libebt/libebt_backtracable_TEST.cc ->
+	libebt/libebt_backtraceable_TEST.cc, doc/libebt_doc.hh,
+	doc/doxygen.conf.in, doc/header.html: Use Backtraceable rather than
+	Backtracable for header and class names. Include backwards compatibility
+	wrappers. Mark backwards compatibility wrappers as deprecated using
+	Doxygen and (where supported) __attribute__ .
+
 2005-12-07 Ciaran McCreesh <ciaranm@gentoo.org>
 
 	* Version 1.0.0: Release.

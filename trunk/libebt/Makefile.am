@@ -4,10 +4,10 @@ AM_CXXFLAGS = -I$(top_srcdir)
 EXTRA_DIST = libebt_version.hh.in
 libincludedir = $(includedir)/libebt
 libinclude_HEADERS = libebt.hh libebt_util.hh libebt_version.hh \
-	libebt_context.hh libebt_backtracable.hh libebt_boost_threads.hh \
-	libebt_zthread_threads.hh libebt_pthread_threads.hh
+	libebt_context.hh libebt_backtracable.hh libebt_backtraceable.hh \
+	libebt_boost_threads.hh libebt_zthread_threads.hh libebt_pthread_threads.hh
 
-the_tests = libebt_context_TEST libebt_backtracable_TEST libebt_util_TEST \
+the_tests = libebt_context_TEST libebt_backtraceable_TEST libebt_util_TEST \
 	libebt_version_TEST
 test_headers = test_framework.hh test_runner.hh
 
@@ -53,8 +53,8 @@ libebt_context_TEST_LDADD = libebttests.a
 libebt_version_TEST_SOURCES = libebt_version_TEST.cc $(test_headers) $(libinclude_HEADERS)
 libebt_version_TEST_LDADD = libebttests.a
 
-libebt_backtracable_TEST_SOURCES = libebt_backtracable_TEST.cc $(test_headers) $(libinclude_HEADERS)
-libebt_backtracable_TEST_LDADD = libebttests.a
+libebt_backtraceable_TEST_SOURCES = libebt_backtraceable_TEST.cc $(test_headers) $(libinclude_HEADERS)
+libebt_backtraceable_TEST_LDADD = libebttests.a
 
 libebt_util_TEST_SOURCES = libebt_util_TEST.cc $(test_headers) $(libinclude_HEADERS)
 libebt_util_TEST_LDADD = libebttests.a
