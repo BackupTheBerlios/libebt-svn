@@ -36,7 +36,7 @@
 #include <libebt/libebt_version.hh>
 #include <libebt/libebt_util.hh>
 #include <libebt/libebt_context.hh>
-#include <libebt/libebt_backtracable.hh>
+#include <libebt/libebt_backtraceable.hh>
 
 /** \file
  * Master include file.
