@@ -107,6 +107,16 @@ namespace libebt
 
         public:
             /**
+             * Provide access to our Tag_ template parameter type.
+             */
+            typedef Tag_ Tag;
+
+            /**
+             * Provide access to our StringType_ template parameter type.
+             */
+            typedef StringType_ StringType;
+
+            /**
              * Constructor.
              *
              * \param context The context message.
