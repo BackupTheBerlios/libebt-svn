@@ -121,6 +121,16 @@ make doxygen
  * are not used except in test cases or when explicitly \#included.
  */
 
+/** \page deprecated Deprecated
+ * \section Deprecated Deprecated Classes and Files
+ *
+ * The 'Backtracable' spelling has been deprecated in favour of the more
+ * sensible 'Backtraceable'. For backwards compatibility, aliases are
+ * available for the older spelling. These may be removed at some point in
+ * the future.
+ *
+ */
+
 /** \page Authors Authors
  * \section Authors
  *

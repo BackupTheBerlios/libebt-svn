@@ -9,7 +9,8 @@ ChangeLog for libebt
 	doc/doxygen.conf.in, doc/header.html: Use Backtraceable rather than
 	Backtracable for header and class names. Include backwards compatibility
 	wrappers. Mark backwards compatibility wrappers as deprecated using
-	Doxygen and (where supported) __attribute__ .
+	Doxygen and (where supported) __attribute__ . Thanks to José Luis Tallón
+	for the suggestion.
 
 2005-12-07 Ciaran McCreesh <ciaranm@gentoo.org>
 
