@@ -124,26 +124,29 @@ namespace libebt
     class LIBEBT_DEPRECATED Backtracable : public Backtraceable<Tag_, StringType_>
     {
         protected:
-            Backtracable() throw () LIBEBT_DEPRECATED :
-                Backtraceable<Tag_, StringType_>()
-            {
-            }
+            Backtracable() throw () LIBEBT_DEPRECATED ;
 
-            /**
-             * Copy constructor.
-             */
-            Backtracable(const Backtracable & other) throw () LIBEBT_DEPRECATED :
-                Backtraceable<Tag_, StringType_>(other)
-            {
-            }
+            Backtracable(const Backtracable & other) throw () LIBEBT_DEPRECATED ;
 
-            /**
-             * Destructor.
-             */
-            virtual ~Backtracable() throw () LIBEBT_DEPRECATED
-            {
-            }
+            virtual ~Backtracable() throw () LIBEBT_DEPRECATED ;
     };
+
+    template <typename Tag_, typename StringType_>
+    Backtracable<Tag_, StringType_>::Backtracable() throw () :
+        Backtraceable<Tag_, StringType_>()
+    {
+    }
+
+    template <typename Tag_, typename StringType_>
+    Backtracable<Tag_, StringType_>::Backtracable(const Backtracable & other) throw () :
+        Backtraceable<Tag_, StringType_>(other)
+    {
+    }
+
+    template <typename Tag_, typename StringType_>
+    Backtracable<Tag_, StringType_>::~Backtracable() throw ()
+    {
+    }
 }
 
 template <typename Tag_, typename StringType_>

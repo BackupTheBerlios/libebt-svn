@@ -2,6 +2,9 @@ ChangeLog for libebt
 
 2005-12-08 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt_backtraceable.hh: Don't tag inline class members with
+	__attribute__ directly, it upsets some older g++ versions.
+
 	* configure.ac: Add -Wextra -Wold-style-casts -Woverloaded-virtual
 	-Wredundant-decls to possible CXXFLAGS.
 
