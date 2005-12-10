@@ -122,6 +122,14 @@ namespace libebt
             {
                 std::copy(_backtrace.begin(), _backtrace.end(), i);
             }
+
+            /**
+             * Are we empty?
+             */
+            bool empty() const
+            {
+                return _backtrace.empty();
+            }
     };
 
     /**

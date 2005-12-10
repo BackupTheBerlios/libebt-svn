@@ -79,6 +79,16 @@ namespace test_cases
         void run()
         {
             TEST_CHECK_EQUAL(BC::backtrace(), "");
+
+            try
+            {
+                throw E();
+            }
+            catch (const E & e)
+            {
+                TEST_CHECK(e.backtrace().empty());
+            }
+
             try
             {
                 BC c1("hail");
@@ -90,6 +100,7 @@ namespace test_cases
             {
                 TEST_CHECK_EQUAL(e.backtrace(), "hail\nEris\n");
                 TEST_CHECK_EQUAL(e.backtrace("~"), "hail~Eris~");
+                TEST_CHECK(! e.backtrace().empty());
                 TEST_CHECK_EQUAL(BC::backtrace(), "");
             }
         }
