@@ -35,6 +35,7 @@
 
 #include <libebt/libebt_util.hh>
 #include <libebt/libebt_order.hh>
+#include <libebt/libebt_extra_role.hh>
 #include <libebt/libebt_context.hh>
 
 #include <list>
@@ -87,6 +88,30 @@ namespace libebt
                 _backtrace(other._backtrace.begin(), other._backtrace.end())
             {
             }
+
+            /**
+             * Constructor, which pulls in items from another Backtraceable
+             * (possibly with a different tag) instance, possibly prefixing
+             * or suffixing each item or adding a joiner item. Usually used
+             * for creating a new exception from a library-thrown exception.
+             *
+             * \param other The other exception.
+             *
+             * \param extra The string to be used in the role described by
+             * the extra_role parameter. May be blank, in which case no
+             * extra_role is ignored and no changes are made.
+             *
+             * \param extra_role If extra is non-blank, describes how it is
+             * used. May be joiner_item, in which case an extra item is created
+             * in between the items from other and our current context with the
+             * text of extra parameter, or prefix_each_item, in which case
+             * each pulled in item is prefixed with the value of extra,
+             * or suffix_each_item (idem, but suffix).
+             */
+            template <typename OtherTag_>
+            Backtraceable(const Backtraceable<OtherTag_, StringType_> & other,
+                    const StringType_ extra = StringType_(),
+                    const ExtraRole extra_role = joiner_item) throw ();
 
             /**
              * Destructor.
@@ -186,6 +211,45 @@ namespace libebt
     {
     }
 }
+
+template <typename Tag_, typename StringType_>
+template <typename OtherTag_>
+libebt::Backtraceable<Tag_, StringType_>::Backtraceable(
+        const Backtraceable<OtherTag_, StringType_> & other,
+        const StringType_ extra,
+        const ExtraRole extra_role) throw () :
+    _backtrace()
+{
+    other.copy_backtrace_items_to(std::back_inserter(_backtrace));
+
+    do
+    {
+        if (extra.empty())
+            break;
+
+        switch (extra_role)
+        {
+            case joiner_item:
+                _backtrace.push_front(extra);
+                break;
+
+            case prefix_each_item:
+            case suffix_each_item:
+                {
+                    typename ListType::iterator p(_backtrace.begin()),
+                             end(_backtrace.end());
+                    for ( ; p != end ; ++p)
+                        *p = (prefix_each_item == extra_role) ?
+                            (extra + *p) : (*p + extra);
+                }
+                break;
+        }
+    } while (false);
+
+    BacktraceContext<Tag_, StringType_>::copy_backtrace_items_to(
+            std::inserter(_backtrace, _backtrace.begin()));
+}
+
 
 template <typename Tag_, typename StringType_>
 StringType_

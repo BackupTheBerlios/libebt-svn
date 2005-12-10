@@ -66,6 +66,35 @@ namespace test_cases
                 std::exception()
             {
             }
+
+            template <typename T_>
+            E(const Backtraceable<T_, std::string> & other,
+                    const std::string & extra,
+                    const ExtraRole role) :
+                Backtraceable<OurContext, std::string>(other, extra, role),
+                std::exception()
+            {
+            }
+    };
+
+    class E2 : public Backtraceable<OurContext2, std::string>,
+               public std::exception
+    {
+        public:
+            E2() throw () :
+                Backtraceable<OurContext2, std::string>(),
+                std::exception()
+            {
+            }
+
+            template <typename T_>
+            E2(const Backtraceable<T_, std::string> & other,
+                    const std::string & extra,
+                    const ExtraRole role) :
+                Backtraceable<OurContext2, std::string>(other, extra, role),
+                std::exception()
+            {
+            }
     };
 #endif
 
@@ -112,6 +141,63 @@ namespace test_cases
             }
         }
     } exception_tests;
+
+    /**
+     * \test Merge tests.
+     */
+    struct MergeTests : TestCase
+    {
+        MergeTests() : TestCase("merge tests") { }
+
+        void run()
+        {
+            for (ExtraRole role = joiner_item ; role <= suffix_each_item ;
+                    role = static_cast<ExtraRole>(static_cast<int>(role) + 1))
+            {
+                TEST_CHECK_EQUAL(BC::backtrace(), "");
+                TEST_CHECK_EQUAL(BC2::backtrace(), "");
+
+                try
+                {
+                    BC c1("one");
+                    BC c2("two");
+                    try
+                    {
+                        BC2 c21("three");
+                        BC2 c22("four");
+                        throw E2();
+
+                        TEST_CHECK(false);
+                    }
+                    catch (E2 & e2)
+                    {
+                        throw E(e2, "(x)", role);
+                    }
+                    TEST_CHECK(false);
+                }
+                catch (E & e)
+                {
+                    switch (role)
+                    {
+                        case joiner_item:
+                            TEST_CHECK_EQUAL(e.backtrace("."), "one.two.(x).three.four.");
+                            break;
+
+                        case prefix_each_item:
+                            TEST_CHECK_EQUAL(e.backtrace("."), "one.two.(x)three.(x)four.");
+                            break;
+
+                        case suffix_each_item:
+                            TEST_CHECK_EQUAL(e.backtrace("."), "one.two.three(x).four(x).");
+                            break;
+
+                        default:
+                            TEST_CHECK(false);
+                    }
+                }
+            }
+        }
+    } test_merge;
 }
 
 

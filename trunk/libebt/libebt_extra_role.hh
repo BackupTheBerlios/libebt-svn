@@ -30,18 +30,26 @@
  */
 
 /// Include guard.
-#ifndef HAVE_THE_LIBEBT_LIBEBT_HH
-#define HAVE_THE_LIBEBT_LIBEBT_HH 1
-
-#include <libebt/libebt_version.hh>
-#include <libebt/libebt_util.hh>
-#include <libebt/libebt_order.hh>
-#include <libebt/libebt_extra_role.hh>
-#include <libebt/libebt_context.hh>
-#include <libebt/libebt_backtraceable.hh>
+#ifndef HAVE_THE_LIBEBT_LIBEBT_EXTRA_ROLE_HH
+#define HAVE_THE_LIBEBT_LIBEBT_EXTRA_ROLE_HH 1
 
 /** \file
- * Master include file.
+ * Definitions for the libebt::ExtraRole enum.
  */
 
+namespace libebt
+{
+    /**
+     * Represents the role of the extra string when merging backtrace context
+     * stacks.
+     */
+    enum ExtraRole
+    {
+        joiner_item,          ///< Create a new item in between the two stacks
+        prefix_each_item,     ///< Prefix each item with the value
+        suffix_each_item      ///< Suffix each item with the value
+    };
+}
+
 #endif
+

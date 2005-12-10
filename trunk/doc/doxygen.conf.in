@@ -459,6 +459,7 @@ INPUT += ../libebt/libebt_boost_threads.hh
 INPUT += ../libebt/libebt_boost_threads_TEST.cc
 INPUT += ../libebt/libebt_context.hh
 INPUT += ../libebt/libebt_context_TEST.cc
+INPUT += ../libebt/libebt_extra_role.hh
 INPUT += ../libebt/libebt_order.hh
 INPUT += ../libebt/libebt_pthread_threads.hh
 INPUT += ../libebt/libebt_pthread_threads_TEST.cc
