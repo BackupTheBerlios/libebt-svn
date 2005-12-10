@@ -2,6 +2,9 @@ ChangeLog for libebt
 
 2005-12-10 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt_backtraceable.hh, doc/doxygen.css,
+	doxygen/doxygen.conf.in: Minor documentation tweaks.
+
 	* libebt/libebt_backtraceable.hh, libebt/libebt_backtraceable_TEST.cc:
 	Add empty() method to the Backtraceable class, for consistency with
 	BacktraceContext.
