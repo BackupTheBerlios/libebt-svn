@@ -450,18 +450,25 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT = ../libebt/libebt.hh ../libebt/libebt_util.hh
-INPUT += ../libebt/libebt_util_TEST.cc ../libebt/libebt_wstring_TEST.cc
-INPUT += ../libebt/libebt_version.hh ../libebt/libebt_boost_threads_TEST.cc
-INPUT += ../libebt/libebt_zthread_threads_TEST.cc libebt_doc.hh
-INPUT += ../libebt/libebt_context.hh ../libebt/libebt_backtracable.hh
+INPUT = libebt_doc.hh
+INPUT += ../libebt/libebt.hh
+INPUT += ../libebt/libebt_backtracable.hh
 INPUT += ../libebt/libebt_backtraceable.hh
-INPUT += ../libebt/libebt_version_TEST.cc ../libebt/libebt_context_TEST.cc
 INPUT += ../libebt/libebt_backtraceable_TEST.cc
 INPUT += ../libebt/libebt_boost_threads.hh
-INPUT += ../libebt/libebt_zthread_threads.hh
+INPUT += ../libebt/libebt_boost_threads_TEST.cc
+INPUT += ../libebt/libebt_context.hh
+INPUT += ../libebt/libebt_context_TEST.cc
+INPUT += ../libebt/libebt_order.hh
 INPUT += ../libebt/libebt_pthread_threads.hh
 INPUT += ../libebt/libebt_pthread_threads_TEST.cc
+INPUT += ../libebt/libebt_util.hh
+INPUT += ../libebt/libebt_util_TEST.cc
+INPUT += ../libebt/libebt_version.hh
+INPUT += ../libebt/libebt_version_TEST.cc
+INPUT += ../libebt/libebt_wstring_TEST.cc
+INPUT += ../libebt/libebt_zthread_threads.hh
+INPUT += ../libebt/libebt_zthread_threads_TEST.cc
 
 # If the value of the INPUT tag contains directories, you can use the 
 # FILE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
@@ -1068,7 +1075,7 @@ PERL_PATH              = /usr/bin/perl
 # fallback. It is recommended to install and use dot, since it yields more 
 # powerful graphs.
 
-CLASS_DIAGRAMS         = YES
+CLASS_DIAGRAMS         = NO
 
 # If set to YES, the inheritance and collaboration graphs will hide 
 # inheritance and usage relations if the target is undocumented 

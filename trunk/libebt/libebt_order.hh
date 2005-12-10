@@ -30,17 +30,23 @@
  */
 
 /// Include guard.
-#ifndef HAVE_THE_LIBEBT_LIBEBT_HH
-#define HAVE_THE_LIBEBT_LIBEBT_HH 1
-
-#include <libebt/libebt_version.hh>
-#include <libebt/libebt_util.hh>
-#include <libebt/libebt_order.hh>
-#include <libebt/libebt_context.hh>
-#include <libebt/libebt_backtraceable.hh>
+#ifndef HAVE_THE_LIBEBT_LIBEBT_ORDER_HH
+#define HAVE_THE_LIBEBT_LIBEBT_ORDER_HH 1
 
 /** \file
- * Master include file.
+ * Definitions for the libebt::Order enum.
  */
+
+namespace libebt
+{
+    /**
+     * Represents an order for backtrace items.
+     */
+    enum Order
+    {
+        oldest_first,         ///< Oldest items come first.
+        newest_first          ///< Newest items come first.
+    };
+}
 
 #endif

@@ -34,6 +34,7 @@
 #define HAVE_THE_LIBEBT_LIBEBT_CONTEXT_HH 1
 
 #include <libebt/libebt_util.hh>
+#include <libebt/libebt_order.hh>
 
 #include <list>
 #include <string>
@@ -159,10 +160,14 @@ namespace libebt
              * information.
              *
              * \param item_terminator A terminator which is appended to every
-             *                        context item. Defaults to a newline.
+             * context item. Defaults to a newline.
+             *
+             * \param order If newest_first, start with the top of the context
+             * stack, rather than the bottom. Defaults to oldest_first.
              */
-            static StringType_ backtrace(const StringType_ & item_terminator =
-                    newline_string<StringType_>());
+            static StringType_ backtrace(
+                    const StringType_ & item_terminator = newline_string<StringType_>(),
+                    const Order order = oldest_first);
 
             /**
              * Copy backtrace items to the insert iterator I_.
@@ -178,13 +183,20 @@ namespace libebt
 
 template <typename Tag_, typename StringType_>
 StringType_
-libebt::BacktraceContext<Tag_, StringType_>::backtrace(const StringType_ & item_terminator)
+libebt::BacktraceContext<Tag_, StringType_>::backtrace(
+        const StringType_ & item_terminator,
+        const Order order)
 {
     StringType_ result;
     typename HolderType::ListType::const_iterator p(HolderType::get_list()->begin()),
              end(HolderType::get_list()->end());
     for ( ; p != end ; ++p)
-        result = result + *p + item_terminator;
+    {
+        if (newest_first == order)
+            result = *p + item_terminator + result;
+        else
+            result = result + *p + item_terminator;
+    }
     return result;
 }
 

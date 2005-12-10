@@ -34,6 +34,7 @@
 #define HAVE_THE_LIBEBT_LIBEBT_BACKTRACEABLE_HH 1
 
 #include <libebt/libebt_util.hh>
+#include <libebt/libebt_order.hh>
 #include <libebt/libebt_context.hh>
 
 #include <list>
@@ -108,11 +109,15 @@ namespace libebt
             /**
              * String representation of our backtrace.
              *
-             * \param item_terminator A terminator which is appended to every
-             *                        context item. Defaults to a newline.
+             * \param item_terminator A terminator that is appended to every
+             * context item. Defaults to a newline.
+             *
+             * \param order If newest_first, display the top item in the stack
+             * first. Defaults to oldest_first.
              */
-            StringType_ backtrace(const StringType_ & item_terminator =
-                    newline_string<StringType_>()) const;
+            StringType_ backtrace(
+                    const StringType_ & item_terminator = newline_string<StringType_>(),
+                    const Order order = oldest_first) const;
 
             /**
              * Copy backtrace items to the insert iterator I_.
@@ -184,12 +189,19 @@ namespace libebt
 
 template <typename Tag_, typename StringType_>
 StringType_
-libebt::Backtraceable<Tag_, StringType_>::backtrace(const StringType_ & item_terminator) const
+libebt::Backtraceable<Tag_, StringType_>::backtrace(
+        const StringType_ & item_terminator,
+        const Order order) const
 {
     StringType_ result;
     typename ListType::const_iterator p(_backtrace.begin()), end(_backtrace.end());
     for ( ; p != end ; ++p)
-        result = result + *p + item_terminator;
+    {
+        if (newest_first == order)
+            result = *p + item_terminator + result;
+        else
+            result = result + *p + item_terminator;
+    }
     return result;
 }
 

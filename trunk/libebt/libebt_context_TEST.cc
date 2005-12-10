@@ -161,6 +161,35 @@ namespace test_cases
     } delim_tests;
 
     /**
+     * \test Tests using order.
+     */
+    struct OrderTests : TestCase
+    {
+        OrderTests() : TestCase("order tests") { }
+
+        void run()
+        {
+            TEST_CHECK_EQUAL(BC::backtrace("\n", newest_first), "");
+            TEST_CHECK_EQUAL(BC::backtrace("", newest_first), "");
+            TEST_CHECK_EQUAL(BC::backtrace(" --- ", newest_first), "");
+
+            BC c1("one");
+            TEST_CHECK_EQUAL(BC::backtrace("\n", newest_first), "one\n");
+            TEST_CHECK_EQUAL(BC::backtrace("", newest_first), "one");
+            TEST_CHECK_EQUAL(BC::backtrace(" --- ", newest_first), "one --- ");
+
+            BC c2("two");
+            TEST_CHECK_EQUAL(BC::backtrace("\n", newest_first), "two\none\n");
+            TEST_CHECK_EQUAL(BC::backtrace("", newest_first), "twoone");
+            TEST_CHECK_EQUAL(BC::backtrace(" --- ", newest_first), "two --- one --- ");
+
+            TEST_CHECK_EQUAL(BC::backtrace("\n", oldest_first), "one\ntwo\n");
+            TEST_CHECK_EQUAL(BC::backtrace("", oldest_first), "onetwo");
+            TEST_CHECK_EQUAL(BC::backtrace(" --- ", oldest_first), "one --- two --- ");
+        }
+    } order_tests;
+
+    /**
      * \test Simple change context tests.
      */
     struct SimpleChangeTests : TestCase

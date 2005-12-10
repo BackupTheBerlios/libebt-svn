@@ -2,6 +2,13 @@ ChangeLog for libebt
 
 2005-12-10 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt_backtraceable.hh, libebt/libebt_context_TEST.cc,
+	libebt/libebt_order.hh, libebt/libebt.hh, libebt/libebt_context.hh,
+	libebt/libebt_backtraceable_TEST.cc, doc/doxygen.conf.in: Add Order
+	enum type, which can be oldest_first or newest_first, to control the
+	order of items when generating a backtrace. Add order parameter with
+	default of oldest_first (previous behaviour) to backtrace functions.
+
 	* libebt/libebt_backtraceable.hh, doc/doxygen.css,
 	doxygen/doxygen.conf.in: Minor documentation tweaks.
 

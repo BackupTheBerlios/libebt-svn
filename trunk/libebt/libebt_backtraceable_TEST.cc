@@ -100,6 +100,13 @@ namespace test_cases
             {
                 TEST_CHECK_EQUAL(e.backtrace(), "hail\nEris\n");
                 TEST_CHECK_EQUAL(e.backtrace("~"), "hail~Eris~");
+
+                TEST_CHECK_EQUAL(e.backtrace("\n", oldest_first), "hail\nEris\n");
+                TEST_CHECK_EQUAL(e.backtrace("~", oldest_first), "hail~Eris~");
+
+                TEST_CHECK_EQUAL(e.backtrace("\n", newest_first), "Eris\nhail\n");
+                TEST_CHECK_EQUAL(e.backtrace("~", newest_first), "Eris~hail~");
+
                 TEST_CHECK(! e.backtrace().empty());
                 TEST_CHECK_EQUAL(BC::backtrace(), "");
             }
