@@ -5,7 +5,8 @@ EXTRA_DIST = libebt_version.hh.in
 libincludedir = $(includedir)/libebt
 libinclude_HEADERS = libebt.hh libebt_util.hh libebt_version.hh \
 	libebt_context.hh libebt_backtracable.hh libebt_backtraceable.hh \
-	libebt_boost_threads.hh libebt_zthread_threads.hh libebt_pthread_threads.hh
+	libebt_boost_threads.hh libebt_zthread_threads.hh libebt_pthread_threads.hh \
+	libebt_order.hh
 
 the_tests = libebt_context_TEST libebt_backtraceable_TEST libebt_util_TEST \
 	libebt_version_TEST
