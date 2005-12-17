@@ -1,5 +1,11 @@
 ChangeLog for libebt
 
+2005-12-17 Ciaran McCreesh <ciaranm@gentoo.org>
+
+	* configure.ac, libebt/libebt_pthread_threads_TEST.cc: Make configure
+	smarter about using -W flags when using the Intel compiler. Fix
+	pthread tests to include <unistd.h> for sleep.
+
 2005-12-10 Ciaran McCreesh <ciaranm@gentoo.org>
 
 	* libebt/libebt_backtraceable.hh, libebt/libebt_extra_role.hh,

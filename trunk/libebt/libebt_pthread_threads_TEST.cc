@@ -30,6 +30,7 @@
  */
 
 #include <pthread.h>
+#include <unistd.h>
 
 #include "libebt.hh"
 #include "libebt_pthread_threads.hh"
