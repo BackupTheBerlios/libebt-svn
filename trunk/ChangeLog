@@ -1,5 +1,10 @@
 ChangeLog for libebt
 
+2005-12-21 Ciaran McCreesh <ciaranm@gentoo.org>
+
+	* m4/libebt_check_cxxflag.m4: Include <iostream> header when checking
+	to see whether -pedantic is usable, to avoid problems with uclibc++.
+
 2005-12-17 Ciaran McCreesh <ciaranm@gentoo.org>
 
 	* Version 1.2.1: Release.

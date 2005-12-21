@@ -4,7 +4,12 @@ AC_DEFUN([LIBEBT_CHECK_CXXFLAG], [
 	  AC_MSG_CHECKING([for usable $1 flag])
 	  AC_COMPILE_IFELSE([
 #include <string>
-std::string s;
+#include <iostream>
+void f()
+{
+	std::string s("test");
+	std::cout << s << std::endl;
+}
 	],
 	[libebt_cxxflag_success=yes],
 	[libebt_cxxflag_success=no])
