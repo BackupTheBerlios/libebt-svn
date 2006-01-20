@@ -1,0 +1,12 @@
+README for libebt
+
+The libebt library provides a clean way of getting human-readable backtrace
+messages in C++. It uses the RAII (resource acquisition is initialisation)
+idiom to manage backtrace stack items.
+
+Developer documentation in HTML format is available via 'doxygen'. Use
+'make doxygen' to create it.
+
+libebt was written by Ciaran McCreesh <ciaranm@gentoo.org>. For the latest
+version, visit http://libebt.berlios.de/ .
+
