@@ -2,6 +2,11 @@ ChangeLog for libebt
 
 2006-01-20 Ciaran McCreesh <ciaranm@gentoo.org>
 
+	* libebt/libebt_backtraceable.hh: Pass strings by reference rather
+	than value.
+
+2006-01-20 Ciaran McCreesh <ciaranm@gentoo.org>
+
 	* libebt/Makefile.am: Use check_ rather than noinst_.
 
 2005-12-21 Ciaran McCreesh <ciaranm@gentoo.org>

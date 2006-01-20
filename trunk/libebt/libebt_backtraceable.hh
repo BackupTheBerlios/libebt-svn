@@ -110,7 +110,7 @@ namespace libebt
              */
             template <typename OtherTag_>
             Backtraceable(const Backtraceable<OtherTag_, StringType_> & other,
-                    const StringType_ extra = StringType_(),
+                    const StringType_ & extra = StringType_(),
                     const ExtraRole extra_role = joiner_item) throw ();
 
             /**
@@ -216,7 +216,7 @@ template <typename Tag_, typename StringType_>
 template <typename OtherTag_>
 libebt::Backtraceable<Tag_, StringType_>::Backtraceable(
         const Backtraceable<OtherTag_, StringType_> & other,
-        const StringType_ extra,
+        const StringType_ & extra,
         const ExtraRole extra_role) throw () :
     _backtrace()
 {
