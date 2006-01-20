@@ -60,8 +60,8 @@ libebt_backtraceable_TEST_LDADD = libebttests.a
 libebt_util_TEST_SOURCES = libebt_util_TEST.cc $(test_headers) $(libinclude_HEADERS)
 libebt_util_TEST_LDADD = libebttests.a
 
-noinst_PROGRAMS = $(TESTS) libebt_demo
-noinst_LIBRARIES = libebttests.a
+check_PROGRAMS = $(TESTS) libebt_demo
+check_LIBRARIES = libebttests.a
 
 libebt_demo_SOURCES = libebt_demo.cc $(libinclude_HEADERS)
 
