@@ -5,7 +5,7 @@
 #define HAVE_THE_LIBEBT_LIBEBT_PTHREAD_THREADS_HH 1
 
 #include <pthread.h>
-#include <list>
+#include <deque>
 #include <string>
 #include <exception>
 
@@ -43,7 +43,7 @@ namespace libebt
             /**
              * Our list type.
              */
-            typedef std::list<StringType_> ListType;
+            typedef std::deque<StringType_> ListType;
 
             /**
              * A pointer to our list type.

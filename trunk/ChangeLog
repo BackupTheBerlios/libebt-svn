@@ -1,5 +1,12 @@
 ChangeLog for libebt
 
+2006-01-26 Ciaran McCreesh <ciaranm@gentoo.org>
+
+	* libebt/libebt_boost_threads.hh, libebt/libebt_pthread_threads.hh,
+	libebt/libebt_backtraceable.hh, libebt/libebt_zthread_threads.hh,
+	libebt/libebt_context.hh: Switch to using a deque rather than a list
+	by default.
+
 2006-01-20 Ciaran McCreesh <ciaranm@gentoo.org>
 
 	* Version 1.2.2: Release.

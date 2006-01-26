@@ -4,7 +4,7 @@
 #ifndef HAVE_THE_LIBEBT_LIBEBT_ZTHREAD_THREADS_HH
 #define HAVE_THE_LIBEBT_LIBEBT_ZTHREAD_THREADS_HH 1
 
-#include <list>
+#include <deque>
 #include <string>
 
 #include <zthread/ThreadLocal.h>
@@ -83,7 +83,7 @@ namespace libebt
         /**
          * Our list type.
          */
-        typedef std::list<std::string> ListType;
+        typedef std::deque<std::string> ListType;
 
         /**
          * A pointer to our list type.

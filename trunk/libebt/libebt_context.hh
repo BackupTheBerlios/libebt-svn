@@ -36,7 +36,7 @@
 #include <libebt/libebt_util.hh>
 #include <libebt/libebt_order.hh>
 
-#include <list>
+#include <deque>
 #include <string>
 #include <algorithm>
 #include <iterator>
@@ -60,7 +60,7 @@ namespace libebt
         /**
          * Our list type.
          */
-        typedef std::list<StringType_> ListType;
+        typedef std::deque<StringType_> ListType;
 
         /**
          * A pointer to our list type.

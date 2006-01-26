@@ -4,7 +4,7 @@
 #ifndef HAVE_THE_LIBEBT_LIBEBT_BOOST_THREADS_HH
 #define HAVE_THE_LIBEBT_LIBEBT_BOOST_THREADS_HH 1
 
-#include <list>
+#include <deque>
 #include <string>
 
 #include <boost/thread.hpp>
@@ -26,7 +26,7 @@ namespace libebt
         /**
          * Our list type.
          */
-        typedef std::list<StringType_> ListType;
+        typedef std::deque<StringType_> ListType;
 
         /**
          * A pointer to our list type.

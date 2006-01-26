@@ -65,7 +65,7 @@ namespace libebt
             /**
              * Our backtrace list type. Internal use only.
              */
-            typedef std::list<StringType_> ListType;
+            typedef std::deque<StringType_> ListType;
 
             ListType _backtrace;
 
