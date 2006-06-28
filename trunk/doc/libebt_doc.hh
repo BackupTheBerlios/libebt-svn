@@ -84,10 +84,9 @@ Error!
  *
  * \section compiling Compiling libebt
  *
- * libebt uses a standard autotools setup. Typically it can be built using:
+ * libebt uses the Adon/Banai build system. Typically it can be built using:
  *
  * \verbatim
-./configure
 make
 make check
 sudo make install
@@ -101,14 +100,16 @@ make doxygen
 \endverbatim
  *
  * If you are using a Subversion checkout rather than a source tarball, you
- * will probably need to run:
- *
+ * will probably need to adonify sources first.
+ * Download the latest version of Adon/Banai from
+ * <a href="http://www.total-knowledge.com/progs/adon-banai/">Adon/Banai home</A>.
+ * Unpack it somewhere and change to the Adon/Banai directory.
+ * Run:
  * \verbatim
-./autogen.bash
+./adonify.sh --destination=/path/to/libebt/sources --pkgname=libebt
 \endverbatim
  *
- * to create the configure script. This will require a full GNU autotools setup
- * on your system.
+ * to set up all necessary makefiles.
  *
  * libebt does not need any libraries beyond a C++ standard library
  * implementation. If the <a href="http://www.boost.org/">Boost</a> library

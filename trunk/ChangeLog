@@ -1,5 +1,8 @@
 ChangeLog for libebt
 2006-06-28 Ilya A. Volynets-Evenbakh <ilya@total-knowledge.com>
+	* doc/libebt_doc.hh doc/html: Update build instructions
+
+2006-06-28 Ilya A. Volynets-Evenbakh <ilya@total-knowledge.com>
 	* Rules-debug.mk, adon-files.mk, env-tests/env-wstring-kirpich.mk,
 	env-tests/cxx-gen-kirpich.cpp, env-tests/link-test.sh,
 	env-tests/env-zthread-kirpich.mk, env-tests/env-cxx-flag-kirpich.mk,
