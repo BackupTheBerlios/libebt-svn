@@ -32,7 +32,7 @@
 #ifndef HAVE_LIBEBT_TEST_RUNNER_HH
 #define HAVE_LIBEBT_TEST_RUNNER_HH 1
 
-#include "config.h"
+//#include "config.h"
 
 int main(int, const char * const * const argv);
 

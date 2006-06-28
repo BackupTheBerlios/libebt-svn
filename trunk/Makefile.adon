@@ -1,0 +1,2 @@
+ADON_SUBDIRS := libebt doc
+EXTRA_DIST := README LICENCE ChangeLog

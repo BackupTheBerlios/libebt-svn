@@ -1,0 +1,9 @@
+CLEANFILES = *~ html/* html
+MAINTAINERCLEANFILES = Makefile.in
+
+EXTRA_DIST = doxygen.conf.in header.html footer.html doxygen.css libebt_doc.hh
+
+doxygen : $(ADON_CURDIR)/doxygen.conf libebt/*.hh libebt/*.cc \
+		$(ADON_CURDIR)/header.html $(ADON_CURDIR)/footer.html \
+		$(ADON_CURDIR)/libebt_doc.hh
+	cd $(ADON_FULLPATH) && doxygen doxygen.conf

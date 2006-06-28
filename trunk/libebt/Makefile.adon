@@ -1,0 +1,56 @@
+CLEANFILES := *~
+MAINTAINERCLEANFILES := Makefile.in libebt_version.hh
+TOP_CPPFLAGS += -I$(ADON_FULLPATH)
+EXTRA_DIST := libebt_version.hh.in
+pkginclude_HEADERS := libebt.hh libebt_util.hh libebt_version.hh \
+	libebt_context.hh libebt_backtracable.hh libebt_backtraceable.hh \
+	libebt_boost_threads.hh libebt_zthread_threads.hh libebt_pthread_threads.hh \
+	libebt_order.hh libebt_extra_role.hh
+
+the_tests := libebt_context_TEST libebt_backtraceable_TEST libebt_util_TEST \
+	libebt_version_TEST
+test_headers := test_framework.hh test_runner.hh
+noinst_HEADERS:=$(test_headers)
+
+the_tests += libebt_wstring_TEST
+libebt_wstring_TEST_SOURCES := libebt_wstring_TEST.cc
+libebt_wstring_TEST_LDFLAGS := -lebttests
+libebt_wstring_TEST_CONDITIONAL := USE_WSTRING_TESTS
+
+the_tests += libebt_boost_threads_TEST
+libebt_boost_threads_TEST_SOURCES := libebt_boost_threads_TEST.cc
+libebt_boost_threads_TEST_LDFLAGS := -lebttests -lboost_thread
+libebt_boost_threads_TEST_CXXFLAGS := -pthread $(AM_CXXFLAGS)
+libebt_boost_threads_TEST_CONDITIONAL := HAVE_BOOST_THREAD
+
+the_tests += libebt_zthread_threads_TEST
+libebt_zthread_threads_TEST_SOURCES := libebt_zthread_threads_TEST.cc
+libebt_zthread_threads_TEST_LDFLAGS := -lebttests -lZThread
+libebt_zthread_threads_TEST_CONDITIONAL := HAVE_ZTHREAD
+
+the_tests += libebt_pthread_threads_TEST
+libebt_pthread_threads_TEST_SOURCES := libebt_pthread_threads_TEST.cc
+libebt_pthread_threads_TEST_LDFLAGS := -lebttests -lpthread
+libebt_pthread_threads_TEST_CONDITIONAL := HAVE_PTHREAD
+
+TESTS := $(the_tests)
+
+libebttests_SOURCES := test_framework.cc test_runner.cc
+libebt_context_TEST_SOURCES := libebt_context_TEST.cc
+libebt_context_TEST_LDFLAGS := -lebttests
+
+libebt_version_TEST_SOURCES := libebt_version_TEST.cc
+libebt_version_TEST_LDFLAGS := -lebttests
+
+libebt_backtraceable_TEST_SOURCES := libebt_backtraceable_TEST.cc
+libebt_backtraceable_TEST_LDFLAGS := -lebttests
+
+libebt_util_TEST_SOURCES := libebt_util_TEST.cc
+libebt_util_TEST_LDFLAGS := -lebttests
+
+check_STLIBS := libebttests
+check_PROGRAMS := $(TESTS) libebt_demo
+
+libebt_demo_SOURCES := libebt_demo.cc
+
+$(addprefix $(ADON_BUILD)/,$(addsuffix -dep,$(the_tests))): $(ADON_BUILD)/$(ADON_CURDIR)/libebttests.a

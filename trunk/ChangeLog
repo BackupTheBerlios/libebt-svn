@@ -1,4 +1,7 @@
 ChangeLog for libebt
+2006-05-11 Ilya A. Volynets-Evenbakh <ilya@total-knowledge.com>
+	* (lots of files): Switch from auto-tools to Adon/Banai build system
+	http://www.total-knowledge.com/progs/adon-banai/
 
 2006-01-26 Ciaran McCreesh <ciaranm@gentoo.org>
 

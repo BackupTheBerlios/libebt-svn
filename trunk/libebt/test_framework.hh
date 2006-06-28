@@ -32,7 +32,7 @@
 #ifndef HAVE_LIBEBT_TEST_FRAMEWORK_HH
 #define HAVE_LIBEBT_TEST_FRAMEWORK_HH 1
 
-#include "config.h"
+//#include "config.h"
 #include <libebt/libebt_util.hh>
 #include <string>
 #include <memory>

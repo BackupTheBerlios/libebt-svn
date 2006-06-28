@@ -1,0 +1,16 @@
+ADON_BUILD?=debug
+
+include local.mk
+
+########## End of configurable variables###########
+all: doall
+
+$(shell echo "">log)
+
+include rules.mk
+
+doall: $(adon_TARGETS)
+	@echo $^
+
+install: doinstall
+
