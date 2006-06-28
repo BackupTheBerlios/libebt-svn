@@ -1,4 +1,16 @@
 ChangeLog for libebt
+2006-06-28 Ilya A. Volynets-Evenbakh <ilya@total-knowledge.com>
+	* Rules-debug.mk, adon-files.mk, env-tests/env-wstring-kirpich.mk,
+	env-tests/cxx-gen-kirpich.cpp, env-tests/link-test.sh,
+	env-tests/env-zthread-kirpich.mk, env-tests/env-cxx-flag-kirpich.mk,
+	env-tests/env-tests.mk, env-tests/pthread-kirpich.c,
+	env-tests/env-lib.mk, env-tests/boost-thread-kirpich.cpp,
+	env-tests/env-lib.sh, env-tests/wstring-kirpich.cpp,
+	env-tests/zthread-kirpich.cpp, env-tests/env-pthread-kirpich.mk,
+	env-tests/env-boost-thread-kirpich.mk, env-tests/compile-test.sh,
+	Makefile.real, vardefs.mk, rules.mk, configure.ac, config, Makefile:
+	remove generated files and unneeded directories.
+
 2006-05-11 Ilya A. Volynets-Evenbakh <ilya@total-knowledge.com>
 	* (lots of files): Switch from auto-tools to Adon/Banai build system
 	http://www.total-knowledge.com/progs/adon-banai/
